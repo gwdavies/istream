@@ -4,6 +4,8 @@ import xbmcgui
 # xbmc global Variable
 iStreamProgressDialog = ""
 yume = ""
+iStreamProgressDialogCancelled = False
+PlayAD = True
 
 class Player(xbmc.Player):
     def setVars(self, p_YUME):
@@ -19,7 +21,7 @@ class Player(xbmc.Player):
     
         
 class YUME:
-    def __init__(self):
+    def __init__(self, min_ad_duration=15):
         
         import xbmcgui
         self.force = False
@@ -34,22 +36,40 @@ class YUME:
         self.YumeVideoAd075PctTrackUrls = self.win.getProperty("YUME-VIDEO-AD-075-PCT-URL-CSV")
         self.YumeVideoAd100PctTrackUrls = self.win.getProperty("YUME-VIDEO-AD-100-PCT-URL-CSV")
         self.YumeClientIP = self.win.getProperty("YUME-CLIENT-IP")
+        self.min_ad_duration = min_ad_duration
         if not self.YumeClientIP or len(self.YumeClientIP) <= 0 or self.YumeClientIP == '0.0.0.0':
             self.YumeClientIP = self.get_external_ip()
             self.win.setProperty('YUME-CLIENT-IP', self.YumeClientIP )
         
     def get_external_ip(self):
         
-        import urllib
+        import urllib2,xbmcaddon
         import re
-        try:
-            site = urllib.urlopen("http://checkip.dyndns.org/").read()
-            grab = re.findall('([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)', site)
-            address = grab[0]
-        except:
-            address = "0.0.0.0"
-        
+        PLUGIN='script.istream.dialogs'
+        ADDON = xbmcaddon.Addon(id=PLUGIN)
+
+        if ADDON.getSetting('ip')=='':        
+             try:
+
+                    site = urllib2.urlopen("http://api.ipify.org/?format=json",timeout=2).read()
+                    grab = re.findall('([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)', site)
+                    address = grab[0]
+                    ADDON.setSetting('ip',address)
+             except:       
+                try:
+
+                        site = urllib2.urlopen("http://checkip.dyndns.com/").read()
+                        grab = re.findall('([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)', site)
+                        address = grab[0]
+                        ADDON.setSetting('ip',address)
+                except:
+                    address = "0.0.0.0"
+        else:
+            
+            address=ADDON.getSetting('ip')
         return address
+
+    
     def ConvertStringToInt(self, s):
         try: 
             return int(s)
@@ -57,7 +77,11 @@ class YUME:
             return 0
             
     def load(self, ad_request_url="http://plg1.yumenetworks.com/dynamic_preroll_playlist.xml?domain=1992TRzjSSba", force=False):
-        
+
+        try:
+            if xbmc.getCondVisibility('Skin.HasSetting(ShowBackgroundVideo)')==0:
+                xbmc.executebuiltin("Skin.SetBool(ShowBackgroundVideo)")
+        except:pass    
         self.YumeAdRequestUrl = ad_request_url
         
         self.win.setProperty('YUME-AD-REQUEST-URL', self.YumeAdRequestUrl)
@@ -69,21 +93,24 @@ class YUME:
         headers = { 'User-Agent' : 'Mozilla/5.0' }
         
         video_url = None
-        video_url_retry = 3
+        video_url_retry = 1
         
         while video_url == None and video_url_retry > 0:
             
-            video_url_retry = video_url_retry - 1
-            req = urllib2.Request(self.YumeAdRequestUrl, None, headers)
-            yume_ad_data = urllib2.urlopen(req).read()
-            
-            
-            import re
-            #video_url = re.search('(?s)<flash_streaming_url.+?(http.+?\.flv)', yume_ad_data)
-            video_url = re.search('(?s)<mp4_streaming_url.+?(http.+?\.mp4)', yume_ad_data)
+                    try:
+                            video_url_retry = video_url_retry - 1
+                            req = urllib2.Request(self.YumeAdRequestUrl, None, headers)
+                            yume_ad_data = urllib2.urlopen(req, timeout=3).read()
+                            
+                            import re
+                            #video_url = re.search('(?s)<flash_streaming_url.+?(http.+?\.flv)', yume_ad_data)
+                            video_url = re.search('(?s)<mp4_streaming_url.+?(http.+?\.mp4)', yume_ad_data)
+                    except:
+                            pass
+                
         
         if not video_url:
-            
+            return xbmc.log(fucker)
             self.YumeVideoAd = ""
             self.win.setProperty('YUME-VIDEO-AD', self.YumeVideoAd )
             self.YumeVideoAdDur = 0
@@ -98,7 +125,7 @@ class YUME:
             self.win.setProperty('YUME-VIDEO-AD-075-PCT-URL-CSV', self.YumeVideoAd075PctTrackUrls) 
             self.YumeVideoAd100PctTrackUrls = ""
             self.win.setProperty('YUME-VIDEO-AD-100-PCT-URL-CSV', self.YumeVideoAd100PctTrackUrls) 
-            return
+            
             
         video_url = video_url.group(1)
         self.YumeVideoAd = video_url
@@ -109,50 +136,50 @@ class YUME:
         
         yume_000_pcts = ""
         pct_000 = 0
-        for yume_000_pct in re.finditer('(?s)<tracking.+?<impressiontracker[>\t\n\r\f\v ]+(http.+?)[<\t\n\r\f\v]', yume_ad_data):
+        for yume_000_pct in re.finditer('<impressiontracker>(.+?)<', yume_ad_data):
             if pct_000 > 0:
                 yume_000_pcts += self.YumeUrlSep
-            yume_000_pcts += yume_000_pct.group(1)
+            yume_000_pcts += yume_000_pct.group(1).replace('amp;','')
             pct_000 += 1
         self.YumeVideoAd000PctTrackUrls = yume_000_pcts
         self.win.setProperty('YUME-VIDEO-AD-000-PCT-URL-CSV', self.YumeVideoAd000PctTrackUrls) 
         
         yume_025_pcts = ""
         pct_025 = 0
-        for yume_025_pct in re.finditer('(?s)<impressiontracker begin="25%".+?(http.+?)[<\t\n\r\f\v]', yume_ad_data):
+        for yume_025_pct in re.finditer('<impressiontracker begin="25%">(.+?)<', yume_ad_data):
             if pct_025 > 0:
                 yume_025_pcts += self.YumeUrlSep
-            yume_025_pcts += yume_025_pct.group(1)
+            yume_025_pcts += yume_025_pct.group(1).replace('amp;','')
             pct_025 += 1
         self.YumeVideoAd025PctTrackUrls = yume_025_pcts
         self.win.setProperty('YUME-VIDEO-AD-025-PCT-URL-CSV', self.YumeVideoAd025PctTrackUrls) 
        
         yume_050_pcts = ""
         pct_050 = 0
-        for yume_050_pct in re.finditer('(?s)<impressiontracker begin="50%".+?(http.+?)[<\t\n\r\f\v]', yume_ad_data):
+        for yume_050_pct in re.finditer('<impressiontracker begin="50%">(.+?)<', yume_ad_data):
             if pct_050 > 0:
                 yume_050_pcts += self.YumeUrlSep
-            yume_050_pcts += yume_050_pct.group(1)
+            yume_050_pcts += yume_050_pct.group(1).replace('amp;','')
             pct_050 += 1
         self.YumeVideoAd050PctTrackUrls = yume_050_pcts
         self.win.setProperty('YUME-VIDEO-AD-050-PCT-URL-CSV', self.YumeVideoAd050PctTrackUrls) 
     
         yume_075_pcts = ""
         pct_075 = 0
-        for yume_075_pct in re.finditer('(?s)<impressiontracker begin="75%".+?(http.+?)[<\t\n\r\f\v]', yume_ad_data):
+        for yume_075_pct in re.finditer('<impressiontracker begin="75%">(.+?)<', yume_ad_data):
             if pct_075 > 0:
                 yume_075_pcts += self.YumeUrlSep
-            yume_075_pcts += yume_075_pct.group(1)
+            yume_075_pcts += yume_075_pct.group(1).replace('amp;','')
             pct_075 += 1
         self.YumeVideoAd075PctTrackUrls = yume_075_pcts
         self.win.setProperty('YUME-VIDEO-AD-075-PCT-URL-CSV', self.YumeVideoAd075PctTrackUrls) 
             
         yume_100_pcts = ""
         pct_100 = 0
-        for yume_100_pct in re.finditer('(?s)<impressiontracker begin="100%".+?(http.+?)[<\t\n\r\f\v]', yume_ad_data):
+        for yume_100_pct in re.finditer('<impressiontracker begin="100%">(.+?)<', yume_ad_data):
             if pct_100 > 0:
                 yume_100_pcts += self.YumeUrlSep
-            yume_100_pcts += yume_100_pct.group(1)
+            yume_100_pcts += yume_100_pct.group(1).replace('amp;','')
             pct_100 += 1
         self.YumeVideoAd100PctTrackUrls = yume_100_pcts        
         self.win.setProperty('YUME-VIDEO-AD-100-PCT-URL-CSV', self.YumeVideoAd100PctTrackUrls)
@@ -224,13 +251,11 @@ class YUME:
         
         import xbmc 
         try:
-            while self.player.isPlaying() and self.player.getTime() <= 15:
+            while self.player.isPlaying() and self.player.getTime() <= self.min_ad_duration:
                 xbmc.sleep(1000)
             if self.player.isPlaying():
-                
                 self.player.stop()
         except:
-            
             pass
         
 
@@ -242,6 +267,8 @@ class DialogiStreamProgress( xbmcgui.WindowXMLDialog ):
         
         self.progressMessageList = self.getControl(3)
         self.addUpdateItem(self.first_list_item)
+        
+        xbmcgui.Window(10000).setProperty('ISTREAM-PROGRES-DIALOG-CANCELLED', 'FALSE')
         
     def setVars(self, header, first_list_item):
         self.header = header
@@ -260,12 +287,20 @@ class DialogiStreamProgress( xbmcgui.WindowXMLDialog ):
              
     def onFocus( self, controlID ): pass
     
-    def onClick( self, controlID ): pass
+    def onClick( self, controlID ): 
+        if controlID in [101, 102]:
+            global iStreamProgressDialogCancelled
+            iStreamProgressDialogCancelled = False            
+            xbmcgui.Window(10000).setProperty('ISTREAM-PROGRES-DIALOG-CANCELLED', 'TRUE')            
+            self.getControl(1).setLabel( self.header + ' - Cancelling...' )
         
-    def onAction( self, action ):            
-        #if action in [ 5, 6, 7, 8, 9, 10, 92, 117 ] or action.getButtonCode() in [ 275, 257, 261 ]:
-        #    self.close()
-        pass
+    def onAction( self, action ):        
+        if action in [ 5, 6, 7, 8, 9, 10, 92, 117 ] or action.getButtonCode() in [ 275, 257, 261, 102, 101 ]:
+            self.getControl(1).setLabel( self.header + ' - Cancelling...' )            
+            global iStreamProgressDialogCancelled
+            iStreamProgressDialogCancelled = False
+            xbmcgui.Window(10000).setProperty('ISTREAM-PROGRES-DIALOG-CANCELLED', 'TRUE')
+            
             
     def addItem(self, label):
         self.waitForInit()
@@ -285,8 +320,11 @@ class DialogiStreamProgress( xbmcgui.WindowXMLDialog ):
             self.updateItem(label, index)   
     
             
-def show(header="", first_list_item=""):
-        
+def show(header="", first_list_item="", play_ad=True, min_ad_duration=15):
+    
+    global iStreamProgressDialogCancelled
+    iStreamProgressDialogCancelled = False
+    
     global iStreamProgressDialog
     if iStreamProgressDialog and iStreamProgressDialog != "":
         iStreamProgressDialog.show()
@@ -300,17 +338,26 @@ def show(header="", first_list_item=""):
     import xbmc
     xbmc.sleep(1000)
     
-    global yume
-    yume = YUME()
-    yume.playAd()
+    global PlayAD
+    PlayAD = play_ad
+    
+    if PlayAD:
+        global yume
+    if min_ad_duration < 26:
+        min_ad_duration = 26
+        yume = YUME(min_ad_duration=min_ad_duration)
+        yume.playAd()
 
 def addUpdateItem( label, index = -1 ):
     global iStreamProgressDialog
     iStreamProgressDialog.addUpdateItem(label, index)
     
 def close():
-    global yume
-    yume.stopAd()
+
+    global PlayAD
+    if PlayAD:
+        global yume
+        yume.stopAd()
     
     global iStreamProgressDialog
     iStreamProgressDialog.close()
