@@ -972,22 +972,14 @@ def GetSection(indexer, indexer_id, section, url, type, page='', total_pages='',
         except:
             import queue
         message_queue = queue.Queue()
-        try:
-            from istreams.dialogs import DialogiStreamProgress
-            DialogiStreamProgress.show("iStream Metadata", "[COLOR yellow][B]Fetching content metadata...[/B][/COLOR]", True, 5)
-            import threading
-            threading.Thread(target=GetMetas, args=(this_metas, message_queue, indexer, indexer_id, section, url, type, content_items)).start()
-            RetrieveAndDisplayMessagesiStreamProgressDialog(message_queue, DialogiStreamProgress)
-            DialogiStreamProgress.addUpdateItem('Displaying retrieved links...')
-            xbmc.sleep(1000)
-        except:
-            from istreams.dialogs import DialogiStreamProgressSticky
-            DialogiStreamProgressSticky.show("iStream Metadata", "[COLOR yellow][B]Fetching content metadata...[/B][/COLOR]", True, 5)
-            import threading
-            threading.Thread(target=GetMetas, args=(this_metas, message_queue, indexer, indexer_id, section, url, type, content_items)).start()
-            RetrieveAndDisplayMessagesiStreamProgressDialog(message_queue, DialogiStreamProgressSticky)
-            DialogiStreamProgressSticky.addUpdateItem('Displaying retrieved links...')
-            xbmc.sleep(1000)   
+        from istreams.dialogs import DialogiStreamProgress
+        DialogiStreamProgressNoAd.show("iStream Metadata", "[COLOR yellow][B]Fetching content metadata...[/B][/COLOR]", True, 5)
+        import threading
+        threading.Thread(target=GetMetas, args=(this_metas, message_queue, indexer, indexer_id, section, url, type, content_items)).start()
+        RetrieveAndDisplayMessagesiStreamProgressDialog(message_queue, DialogiStreamProgressNoAd)
+        DialogiStreamProgress.addUpdateItem('Displaying retrieved links...')
+        xbmc.sleep(1000)
+  
     else:
         use_meta = False
         
