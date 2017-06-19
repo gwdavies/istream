@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addons>
+<addon id="repository.istream" name="iSTREAM XBMC Addons Repository" version="10.3" provider-name="iSTREAM">
+	<extension point="xbmc.addon.repository" name="iSTREAM">
+		<info compressed="false">http://istreamrepo.me/istream/repo/addons.xml</info>
+		<checksum>http://istreamrepo.me/istream/repo/addons.xml.md5</checksum>
+		<datadir zip="true">http://istreamrepo.me/istream/repo/zips</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>iSTREAM XBMC Addons and Extensions</summary>
+		<description>iSTREAM XBMC Addons and Extensions</description>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="script.icechannel" version="1.0.0.57" name="iSTREAM" provider-name="iSTREAM">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+		<import addon="script.module.urlresolver" version="0.0.1"/>
+		<import addon="script.module.universal" version="0.0.1" />
+		<import addon="script.module.beautifulsoup" version="0.0.1"/>
+		<import addon="script.module.metahandler" version="0.0.1"/>
+		<import addon="script.module.feedparser" version="0.0.1"/>
+		<import addon="script.module.pyamf" version="0.0.1"/>
+		<import addon="script.icechannel.extn.common" version="0.0.9"/>
+		<import addon="script.module.unidecode" version="0.0.1"/>
+		<import addon="script.module.socksipy" version="0.0.1"/>
+		<import addon="script.module.dnspython" version="0.0.1"/>
+		<import addon="script.module.f4mproxy" version="0.0.1"/>
+		<import addon="script.istream.dialogs" version="0.0.1"/>
+		<import addon="script.icechannel.extn.xunity.tv.common" version="0.0.1"/>
+		<import addon="script.module.elementtree" version="1.2.8" />
+		<import addon="script.module.requests" version="0.0.1" />
+    </requires>
+	<extension point="xbmc.python.pluginsource" library="plugin.py" >
+		<provides>video</provides>
+	</extension>
+    <extension point="xbmc.python.module" library="lib" />
+	<extension library="service.py" point="xbmc.service"  start="startup"/>
+    <extension point="xbmc.addon.metadata">
+		<summary lang="en">iSTREAM</summary>
+		<description lang="en">iSTREAM</description>
+		<platform></platform>
+		<language></language>
+		<license></license>
+		<forum></forum>
+		<website></website>
+		<source></source>
+		<email></email>
+    </extension>
+</addon>
+
+<addon id="script.icechannel.extn.common" version="0.3.3" name="iSTREAM - Common" provider-name="iSTREAM">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+    </requires>
+	<extension library="default.py" point="xbmc.service" />
+    <extension point="xbmc.addon.metadata">
+		<summary lang="en">iSTREAM - Common</summary>
+		<description lang="en">iSTREAM - Common</description>
+		<platform></platform>
+		<language></language>
+		<license></license>
+		<forum></forum>
+		<website></website>
+		<source></source>
+		<email></email>
+    </extension>
+</addon>
+
+<addon id="script.icechannel.extn.uk" version="0.0.7" name="iSTREAM - United Kingdom" provider-name="iSTREAM">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+    </requires>
+	<extension library="default.py" point="xbmc.service" />
+    <extension point="xbmc.addon.metadata">
+		<summary lang="en">iSTREAM - United Kingdom</summary>
+		<description lang="en">iSTREAM - United Kingdom</description>
+		<platform></platform>
+		<language></language>
+		<license></license>
+		<forum></forum>
+		<website></website>
+		<source></source>
+		<email></email>
+    </extension>
+</addon>
+
+<addon id="script.icechannel.extn.xunity.tv.common" version="0.0.5" name="Xunity TV - Common" provider-name="xunity.tv">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+    </requires>
+	<extension library="default.py" point="xbmc.service" />
+    <extension point="xbmc.addon.metadata">
+		<summary lang="en">Xunity TV - Common</summary>
+		<description lang="en">Xunity TV - Common</description>
+		<platform></platform>
+		<language></language>
+		<license></license>
+		<forum></forum>
+		<website></website>
+		<source></source>
+		<email></email>
+    </extension>
+</addon>
+
+<addon id="script.icechannel.extn.xunitytalk" version="1.4.0" name=".[COLOR blue]X[/COLOR]unity Talk iStream Extensions" provider-name="[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+    </requires>
+	<extension library="default.py" point="xbmc.service" />
+		<summary lang="en">iStream Extensions by xunitytalk.com</summary>
+    <extension point="xbmc.python.module" library="lib" />
+    <extension point="xbmc.addon.metadata">
+		<description lang="en">iStream Extensions by Xunity Talk Movies Tv Shows Kids Live</description>
+		<!--<provides>video</provides>-->
+		<platform></platform>
+		<language></language>
+		<license></license>
+		<forum></forum>
+		<website></website>
+		<source></source>
+		<email></email>
+    </extension>
+  <extension point="xbmc.service" library="service.py" start="login" />
+</addon>
+
+<addon id="script.icechannel.theme.xunity" version="0.0.1" name="iStream Theme - Xunity" provider-name="iStream">
+<extension library="default.py" point="xbmc.service" />
+<extension point="xbmc.addon.metadata">
+<summary lang="en">iStream Theme - Xunity</summary>
+<description lang="en">iStream Theme - Xunity</description>
+<platform></platform>
+<language></language>
+<license></license>
+<forum></forum>
+<website></website>
+<source></source>
+<email></email>
+</extension>
+</addon>
+
+<addon id="script.icechannel.theme.xunityhd" version="0.0.1" name="iStream Theme - Xunity HD" provider-name="iStream">
+<extension library="default.py" point="xbmc.service" />
+<extension point="xbmc.addon.metadata">
+<summary lang="en">iStream Theme - Xunity HD</summary>
+<description lang="en">iStream Theme - Xunity HD</description>
+<platform></platform>
+<language></language>
+<license></license>
+<forum></forum>
+<website></website>
+<source></source>
+<email></email>
+</extension>
+</addon>
+
+<addon id="script.istream.dialogs" version="0.1.9" name="iSTREAM Custom Windows and Dialogs" provider-name="iSTREAM">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+    </requires>
+	<extension point="xbmc.python.module" library="lib" />
+    <extension point="xbmc.addon.metadata">
+		<summary lang="en">iSTREAM Custom Windows and Dialogs</summary>
+		<description lang="en">Custom UI (Windows and Dialogs) for iSTREAM</description>
+		<platform></platform>
+		<language></language>
+		<license></license>
+		<forum></forum>
+		<website></website>
+		<source></source>
+		<email></email>
+    </extension>
+</addon>
+
+<addon id="script.module.dnspython" name="DNS Python" version="1.11.1" provider-name="dnspython">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+	<summary>A Pure Python DNS module</summary>
+	<description>A Pure Python DNS module</description>
+    <platform>all</platform>
+	<language></language>
+	<license></license>
+	<forum></forum>
+	<website>http://www.dnspython.org/</website>
+	<source>https://github.com/rthalley/dnspython</source>
+	<email></email>
+  </extension>
+</addon>
+
+<addon id="script.module.elementtree"
+       name="Elementtree XML parser"
+       version="1.2.8"
+       provider-name="http://effbot.org/zone/element-index.htm">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.python.module"
+             library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="script.module.f4mproxy"
+	     name="f4m proxy"
+	     version="1.0.16"
+	     provider-name="Shani">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0" />
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary lang="en">Proxy for f4m</summary>
+    <description lang="en">Use this addon to play F4m v1 and v2 streams</description>
+  </extension>
+</addon>
+
+<addon id="script.module.requests"
+       name="requests"
+       version="2.4.3"
+       provider-name="kennethreitz, beenje">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.python.module"
+             library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary>Python HTTP for Humans</summary>
+    <description>Packed for XBMC from https://github.com/kennethreitz/requests</description>
+    <platform>all</platform>
+    <language></language>
+    <license>Apache2</license>
+    <forum></forum>
+    <website>http://python-requests.org</website>
+    <source>https://github.com/beenje/script.module.requests</source>
+    <email>beenje AT gmail.com</email>
+  </extension>
+</addon>
+
+<addon id="script.module.socksipy"
+       name="SocksiPy"
+       version="2.0.0"
+       provider-name="Mossy">
+  <requires>
+    <import addon="xbmc.python"
+    		version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.python.module"
+             library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary>A Python SOCKS client module</summary>
+    <description>Provides a socket-like interface that supports connections to any TCP service through the use of a SOCKS4, SOCKS5 or HTTP proxy. For usage see http://code.google.com/p/socksipy-branch/</description>
+    <license>BSD</license>
+    <platform>all</platform>
+	<forum></forum>
+	<language></language>
+	<website>https://github.com/brendoncrawford/socksipy-x</website>
+	<source>https://github.com/brendoncrawford/socksipy-x</source>
+	<email></email>
+  </extension>
+</addon>
+
+<addon id="script.module.t0mm0.common"
+	     name="t0mm0's common stuff"
+	     version="2.1.1"
+	     provider-name="t0mm0">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0" />
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary lang="en">Collection of commonly used addon routines</summary>
+    <description lang="en">Collection of commonly used addon routines to simplify addon development.</description>
+  </extension>
+</addon>
+
+<addon id="script.module.unidecode"
+       name="Unidecode"
+       version="0.4.14"
+       provider-name="Pypi">
+  <requires>
+    <import addon="xbmc.python"
+    		version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.python.module"
+             library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary>Python Unidecode  module</summary>
+    <description>ASCII transliterations of Unicode text</description>
+    <license></license>
+    <platform>all</platform>
+	<forum></forum>
+	<language></language>
+	<website>https://pypi.python.org/pypi/Unidecode</website>
+	<source>https://pypi.python.org/pypi/Unidecode</source>
+	<email></email>
+  </extension>
+</addon>
+
+<addon id="script.module.universal" name="Universal - An Addons Toolkit" version="2.0.2" provider-name="the-one">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.t0mm0.common" version="0.0.1"/>
+  </requires>
+  <extension library="default.py" point="xbmc.service"  start="startup"/>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Universal - An Addons Toolkit</summary>
+    <description lang="en">Collection of common functionality for addons.</description>
+    <platform>all</platform>
+	<language></language>
+	<license>GNU GENERAL PUBLIC LICENSE. Version 3, June 2007</license>
+	<forum>http://www.xunitytalk.com/</forum>
+	<website>https://github.com/the-one-/script.module.universal/wiki</website>
+	<source>https://github.com/the-one-/script.module.universal</source>
+	<email>xs2the1[at]gmail[dot]com</email>
+  </extension>
+</addon>
+
+<addon id="script.module.urlresolver" name="URLResolver" version="2.10.8" provider-name="Eldorado">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0" />
+    <import addon="script.module.t0mm0.common" version="0.0.1"/>
+    <import addon="script.module.simplejson" version="0.0.1"/>
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary lang="en">Resolve common video host URL's to be playable in XBMC/Kodi.</summary>
+    <description lang="en">Resolve common video host URL's to be playable in XBMC/Kodi, simplify addon development of video plugins requiring multi video hosts.</description>
+  </extension>
+</addon>
+</addons>

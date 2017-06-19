@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="script.module.unidecode"
+       name="Unidecode"
+       version="0.4.14"
+       provider-name="Pypi">
+  <requires>
+    <import addon="xbmc.python" 
+    		version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.python.module"
+             library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary>Python Unidecode  module</summary>
+    <description>ASCII transliterations of Unicode text</description>
+    <license></license>
+    <platform>all</platform>
+	<forum></forum>
+	<language></language>
+	<website>https://pypi.python.org/pypi/Unidecode</website>
+	<source>https://pypi.python.org/pypi/Unidecode</source>
+	<email></email>
+  </extension>
+</addon>

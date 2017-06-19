@@ -1,0 +1,155 @@
+# load lib directory
+# begin
+import xbmc,os
+import re
+xbmc_version =  re.search('^(\d+)', xbmc.getInfoLabel( "System.BuildVersion" ))
+if xbmc_version:
+    xbmc_version = int(xbmc_version.group(1))
+else:
+    xbmc_version = 1
+
+
+addon_path = xbmc.translatePath(os.path.join('special://home/addons', 'script.icechannel.extn.xunitytalk'))
+repo_path = xbmc.translatePath(os.path.join('special://home/addons', 'repository.xunitytalk'))
+repoxml = xbmc.translatePath(os.path.join('special://home/addons', 'repository.xunitytalk','addon.xml'))
+addonxml=xbmc.translatePath(os.path.join('special://home/addons', 'script.icechannel.extn.xunitytalk','addon.xml'))
+
+
+
+
+WRITEME='''<?xml version="1.0" encoding="UTF-8"?>
+        <addon id="script.icechannel.extn.xunitytalk" version="0.0.1" name=".[COLOR blue]X[/COLOR]unity Talk iStream Extensions" provider-name="[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk">
+            <requires>
+                <import addon="xbmc.python" version="2.1.0"/>
+            </requires>
+                <extension library="default.py" point="xbmc.service" />
+                        <summary lang="en">iStream Extensions by xunitytalk.com</summary>
+            <extension point="xbmc.python.module" library="lib" />
+            <extension point="xbmc.addon.metadata">
+                        <description lang="en">iStream Extensions by Xunity Talk Movies Tv Shows Kids Live</description>
+                        <!--<provides>video</provides>-->
+                        <platform></platform>
+                        <language></language>
+                        <license></license>
+                        <forum></forum>
+                        <website></website>
+                        <source></source>
+                        <email></email>
+            </extension>
+          <extension point="xbmc.service" library="service.py" start="login" />
+        </addon>'''
+
+
+WRITEREPO='''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repository.xunitytalk" name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk Repository" version="1.1.1" provider-name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk">
+	<extension point="xbmc.addon.repository" name="Mikey1234 Addon Repository">
+		<info compressed="false">http://xtyrepo.me/xunitytalk/addons/addons.xml</info>
+		<checksum>http://xtyrepo.me/xunitytalk/addons/addons.xml.md5</checksum>
+		<datadir zip="true">http://xtyrepo.me/xunitytalk/addons</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>The Best Third Party Addons for XBMC, .[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk</summary>
+		<description>The Best Third Party Addons for XBMC, .[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk</description>
+		<platform>all</platform>
+	</extension>
+</addon>
+'''
+
+if os.path.exists(repoxml) == False:
+
+    if os.path.exists(repo_path) == False:
+        os.makedirs(repo_path)
+
+
+        f = open(addonxml, mode='w')
+        f.write(WRITEREPO)
+        f.close()
+
+        xbmc.executebuiltin('UpdateLocalAddons') 
+        xbmc.executebuiltin("UpdateAddonRepos")
+        
+
+if os.path.exists(addonxml) == False:
+
+    if os.path.exists(addon_path) == False:
+        os.makedirs(addon_path)
+
+
+        f = open(addonxml, mode='w')
+        f.write(WRITEME)
+        f.close()
+
+        xbmc.executebuiltin('UpdateLocalAddons') 
+        xbmc.executebuiltin("UpdateAddonRepos")
+
+        
+
+if xbmc_version >= 16.9:
+        dependencies = ['repository.istream','repository.xunitytalk','script.module.requests','script.module.elementtree','script.common.plugin.cache','script.istream.dialogs', 'script.module.addon.common', 'script.module.beautifulsoup', 'script.module.dnspython', 'script.module.f4mproxy', 'script.module.feedparser', 'script.module.metahandler', 'script.module.myconnpy', 'script.module.parsedom', 'script.module.pyamf', 'script.module.simple.downloader', 'script.module.socksipy', 'script.module.t0mm0.common', 'script.module.unidecode', 'script.module.universal', 'script.module.urlresolver']
+        
+        import glob
+
+
+        folder = xbmc.translatePath('special://home/addons/')
+
+        for DEPEND in glob.glob(folder+'script.icechannel*'):
+            try:dependencies.append(DEPEND.rsplit('\\', 1)[1])
+            except:dependencies.append(DEPEND.rsplit('/', 1)[1])
+
+
+        for THEPLUGIN in dependencies:
+            xbmc.log(str(THEPLUGIN))
+            query = '{"jsonrpc":"2.0", "method":"Addons.SetAddonEnabled","params":{"addonid":"%s","enabled":true}, "id":1}' % (THEPLUGIN)
+         
+            xbmc.executeJSONRPC(query)
+    
+        xbmc.executebuiltin('UpdateLocalAddons') 
+        xbmc.executebuiltin("UpdateAddonRepos")
+
+                
+if xbmc_version >= 14:
+    addon_id = 'script.icechannel'
+    lib_addon_dir_name = "lib"
+    import xbmcaddon
+    import os
+    from os.path import join, basename
+    import sys
+    addon = xbmcaddon.Addon(id=addon_id)
+    addon_path = addon.getAddonInfo('path')
+    sys.path.append(addon_path)
+    lib_addon_dir_path = os.path.join( addon_path, lib_addon_dir_name)
+    sys.path.append(lib_addon_dir_path)
+    for dirpath, dirnames, files in os.walk(lib_addon_dir_path):
+        sys.path.append(dirpath)
+# end
+
+from entertainment import common
+import os
+
+common._update_settings_xml()
+
+services_path = os.path.join(common.addon_path, 'services')
+
+sti=1
+
+for dirpath, dirnames, files in os.walk(services_path):
+    for f in files:
+        if f.endswith('.py'):
+            service_py = os.path.join(dirpath, f)
+            #cmd = 'RunScript(%s,%s)' % (service_py, '1')
+            #xbmc.executebuiltin(cmd)
+            common.SetScriptOnAlarm(f[:-3], service_py, duration=sti)
+            sti = sti + 1
+
+import xbmcaddon
+
+
+PLUGIN='script.icechannel'
+ADDON = xbmcaddon.Addon(id=PLUGIN)
+if 'googlecode' in ADDON.getSetting('Default_themeurl'):
+    ADDON.setSetting('Default_themeurl','http://istreamrepo.me/istream/images/default/')
+
+try:
+    if 'googlecode' in ADDON.getSetting('Xunity_themeurl'):
+        ADDON.setSetting('Xunity_themeurl','http://istreamrepo.me/istream/images/default/')
+except:pass
