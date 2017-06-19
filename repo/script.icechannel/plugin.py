@@ -972,7 +972,7 @@ def GetSection(indexer, indexer_id, section, url, type, page='', total_pages='',
         except:
             import queue
         message_queue = queue.Queue()
-        from istreams.dialogs import DialogiStreamProgress
+        from istreams.dialogs import DialogiStreamProgressNoAd
         DialogiStreamProgressNoAd.show("iStream Metadata", "[COLOR yellow][B]Fetching content metadata...[/B][/COLOR]", True, 5)
         import threading
         threading.Thread(target=GetMetas, args=(this_metas, message_queue, indexer, indexer_id, section, url, type, content_items)).start()
