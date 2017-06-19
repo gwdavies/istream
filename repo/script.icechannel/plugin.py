@@ -972,11 +972,11 @@ def GetSection(indexer, indexer_id, section, url, type, page='', total_pages='',
         except:
             import queue
         message_queue = queue.Queue()
-        from istreams.dialogs import DialogiStreamProgressNoAd
-        DialogiStreamProgressNoAd.show("iStream Metadata", "[COLOR yellow][B]Fetching content metadata...[/B][/COLOR]", True, 5)
+        from istreams.dialogs import DialogiStreamProgress
+        DialogiStreamProgress.show("iStream Metadata", "[COLOR yellow][B]Fetching content metadata...[/B][/COLOR]")
         import threading
         threading.Thread(target=GetMetas, args=(this_metas, message_queue, indexer, indexer_id, section, url, type, content_items)).start()
-        RetrieveAndDisplayMessagesiStreamProgressDialog(message_queue, DialogiStreamProgressNoAd)
+        RetrieveAndDisplayMessagesiStreamProgressDialog(message_queue, DialogiStreamProgress)
         DialogiStreamProgress.addUpdateItem('Displaying retrieved links...')
         xbmc.sleep(1000)
   
@@ -1519,11 +1519,11 @@ def GetFileHosts(indexer, indexer_id, url, title, name, year, season, episode, t
                 ttl += ' - S' + season + 'E' + episode + ' - ' + title
             add_dir_title( ttl )
 
-        from istreams.dialogs import DialogiStreamProgressNoAd
-        DialogiStreamProgressNoAd.show("iStream: Search Hosts", "Searching for links on the web...")
+        from istreams.dialogs import DialogiStreamProgress
+        DialogiStreamProgress.show("iStream: Search Hosts", "Searching for links on the web...")
         (items, message_queue) = entertainment.GetFileHosts (indexer, indexer_id, url, title, name, year, season, episode, type, urls, autoplay=autoplay)        
-        RetrieveAndDisplayMessagesiStreamProgressDialog(message_queue, DialogiStreamProgressNoAd)
-        DialogiStreamProgressNoAd.addUpdateItem('Displaying retrieved links...')
+        RetrieveAndDisplayMessagesiStreamProgressDialog(message_queue, DialogiStreamProgress)
+        DialogiStreamProgress.addUpdateItem('Displaying retrieved links...')
         xbmc.sleep(1000)        
         
         if trailer_url:
@@ -1577,7 +1577,7 @@ def GetFileHosts(indexer, indexer_id, url, title, name, year, season, episode, t
                         list_key.append(':: ' + item['website'].upper() + ' :: [COLOR ' + quality_to_color.get(item['quality'], 'white') + '][' + item['quality'] + '][/COLOR] [COLOR royalblue]: ' + item['title'] + '[/COLOR]')
                         list_value.append(item_queries)
                         
-        DialogiStreamProgressNoAd.close()
+        DialogiStreamProgress.close()
     else:
         list_key = common.ConvertStringToList(source_names) if len(source_names) > 2 else []
         list_value = common.ConvertStringToList(source_urls) if len(source_urls) > 2 else []
