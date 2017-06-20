@@ -9,16 +9,16 @@ else:
     xbmc_version = 1
 
 
-addon_path = xbmc.translatePath(os.path.join('special://home/addons', 'script.icechannel.extn.xunitytalk'))
+main_path = xbmc.translatePath(os.path.join('special://home/addons', 'repository.mdrepo'))
 repo_path = xbmc.translatePath(os.path.join('special://home/addons', 'repository.istream'))
 repoxml = xbmc.translatePath(os.path.join('special://home/addons', 'repository.istream','addon.xml'))
-addonxml=xbmc.translatePath(os.path.join('special://home/addons', 'script.icechannel.extn.xunitytalk','addon.xml'))
+addonxml=xbmc.translatePath(os.path.join('special://home/addons', 'repository.mdrepo','addon.xml'))
 
 
 
 
 WRITEME='''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-        <addon id="repository.istream" name="iSTREAM XBMC Addons Repository" version="11" provider-name="iSTREAM">
+        <addon id="repository.istream" name="iSTREAM Repository" version="10.3" provider-name="iSTREAM">
             <extension point="xbmc.addon.repository" name="iSTREAM">
 		<info compressed="false">https://raw.githubusercontent.com/mucky-duck/istream/master/repo/addons.xml</info>
 		<checksum>https://raw.githubusercontent.com/mucky-duck/istream/master/repo/addons.xml.md5</checksum>
@@ -33,19 +33,19 @@ WRITEME='''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
 
 WRITEREPO='''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository." name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk Repository" version="1.1.1" provider-name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk">
-	<extension point="xbmc.addon.repository" name="Mikey1234 Addon Repository">
-		<info compressed="false">http://xtyrepo.me/xunitytalk/addons/addons.xml</info>
-		<checksum>http://xtyrepo.me/xunitytalk/addons/addons.xml.md5</checksum>
-		<datadir zip="true">http://xtyrepo.me/xunitytalk/addons</datadir>
+<addon id="repository.mdrepo" name="Mucky Ducks Repo" version="1.0.1" provider-name="Mucky Duck">
+	<extension point="xbmc.addon.repository" name="Mucky Ducks Repo">
+		<info compressed="false">https://raw.githubusercontent.com/mucky-duck/mdrepo/master/addons.xml</info>
+		<checksum>https://raw.githubusercontent.com/mucky-duck/mdrepo/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.githubusercontent.com/mucky-duck/mdrepo/master/</datadir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
-		<summary>The Best Third Party Addons for XBMC, .[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk</summary>
-		<description>The Best Third Party Addons for XBMC, .[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk</description>
+		<summary>Mucky Ducks Repo</summary>
+		<description>Download And Install Addons Developed By Mucky Duck And Various Other Developers </description>
+		<disclaimer>The owners and submitters to this repository do not host or distribute any of the content displayed by these addons nor do they have any affiliation with the content providers.</disclaimer>
 		<platform>all</platform>
 	</extension>
-</addon>
-'''
+</addon>'''
 
 if os.path.exists(repoxml) == False:
 
@@ -61,7 +61,7 @@ if os.path.exists(repoxml) == False:
         xbmc.executebuiltin("UpdateAddonRepos")
         
 
-'''if os.path.exists(addonxml) == False:
+if os.path.exists(addonxml) == False:
 
     if os.path.exists(addon_path) == False:
         os.makedirs(addon_path)
@@ -72,7 +72,7 @@ if os.path.exists(repoxml) == False:
         f.close()
 
         xbmc.executebuiltin('UpdateLocalAddons') 
-        xbmc.executebuiltin("UpdateAddonRepos")'''
+        xbmc.executebuiltin("UpdateAddonRepos")
 
         
 
