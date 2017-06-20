@@ -81,24 +81,6 @@
     </extension>
 </addon>
 
-<addon id="script.icechannel.extn.uk" version="0.0.7" name="iSTREAM - United Kingdom" provider-name="iSTREAM">
-    <requires>
-        <import addon="xbmc.python" version="2.1.0"/>
-    </requires>
-	<extension library="default.py" point="xbmc.service" />
-    <extension point="xbmc.addon.metadata">
-		<summary lang="en">iSTREAM - United Kingdom</summary>
-		<description lang="en">iSTREAM - United Kingdom</description>
-		<platform></platform>
-		<language></language>
-		<license></license>
-		<forum></forum>
-		<website></website>
-		<source></source>
-		<email></email>
-    </extension>
-</addon>
-
 <addon id="script.icechannel.extn.xunity.tv.common" version="0.0.5" name="Xunity TV - Common" provider-name="xunity.tv">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
@@ -115,42 +97,6 @@
 		<source></source>
 		<email></email>
     </extension>
-</addon>
-
-<addon id="script.icechannel.extn.xunitytalk" version="1.4.0" name=".[COLOR blue]X[/COLOR]unity Talk iStream Extensions" provider-name="[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk">
-    <requires>
-        <import addon="xbmc.python" version="2.1.0"/>
-    </requires>
-	<extension library="default.py" point="xbmc.service" />
-		<summary lang="en">iStream Extensions by xunitytalk.com</summary>
-    <extension point="xbmc.python.module" library="lib" />
-    <extension point="xbmc.addon.metadata">
-		<description lang="en">iStream Extensions by Xunity Talk Movies Tv Shows Kids Live</description>
-		<!--<provides>video</provides>-->
-		<platform></platform>
-		<language></language>
-		<license></license>
-		<forum></forum>
-		<website></website>
-		<source></source>
-		<email></email>
-    </extension>
-  <extension point="xbmc.service" library="service.py" start="login" />
-</addon>
-
-<addon id="script.icechannel.theme.xunity" version="0.0.1" name="iStream Theme - Xunity" provider-name="iStream">
-<extension library="default.py" point="xbmc.service" />
-<extension point="xbmc.addon.metadata">
-<summary lang="en">iStream Theme - Xunity</summary>
-<description lang="en">iStream Theme - Xunity</description>
-<platform></platform>
-<language></language>
-<license></license>
-<forum></forum>
-<website></website>
-<source></source>
-<email></email>
-</extension>
 </addon>
 
 <addon id="script.icechannel.theme.xunityhd" version="0.0.1" name="iStream Theme - Xunity HD" provider-name="iStream">
@@ -259,28 +205,6 @@ unshortenit v0.3.0 from https://github.com/jkehler/unshortenit :
 		</description>
 		<license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
 	</extension>
-</addon>
-
-<addon id="script.module.requests"
-       name="requests"
-       version="2.4.3"
-       provider-name="kennethreitz, beenje">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-  </requires>
-  <extension point="xbmc.python.module"
-             library="lib" />
-  <extension point="xbmc.addon.metadata">
-    <summary>Python HTTP for Humans</summary>
-    <description>Packed for XBMC from https://github.com/kennethreitz/requests</description>
-    <platform>all</platform>
-    <language></language>
-    <license>Apache2</license>
-    <forum></forum>
-    <website>http://python-requests.org</website>
-    <source>https://github.com/beenje/script.module.requests</source>
-    <email>beenje AT gmail.com</email>
-  </extension>
 </addon>
 
 <addon id="script.module.socksipy"

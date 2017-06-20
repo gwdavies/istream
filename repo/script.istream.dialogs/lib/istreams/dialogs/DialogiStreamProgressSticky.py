@@ -353,7 +353,7 @@ def show(header="", first_list_item="", play_ad=True, min_ad_duration=15):
     import xbmc
     xbmc.sleep(1000)
     
-    global PlayAD
+    '''global PlayAD
     PlayAD = play_ad
     
     if PlayAD:
@@ -361,7 +361,7 @@ def show(header="", first_list_item="", play_ad=True, min_ad_duration=15):
     if min_ad_duration < 26:
         min_ad_duration = 26
         sticky = sticky(min_ad_duration=min_ad_duration)
-        sticky.playAd()
+        sticky.playAd()'''
 
 def addUpdateItem( label, index = -1 ):
     global iStreamProgressDialog
@@ -369,10 +369,10 @@ def addUpdateItem( label, index = -1 ):
     
 def close():
 
-    global PlayAD
+    '''global PlayAD
     if PlayAD:
         global sticky
-        sticky.stopAd()
+        sticky.stopAd()'''
     
     global iStreamProgressDialog
     iStreamProgressDialog.close()

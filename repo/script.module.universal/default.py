@@ -48,7 +48,7 @@ else:
 
 
 if xbmc_version >= 16.9:
-        dependencies = ['repository.istream','repository.xunitytalk','script.module.requests','script.module.elementtree','script.common.plugin.cache','script.istream.dialogs', 'script.module.addon.common', 'script.module.beautifulsoup', 'script.module.dnspython', 'script.module.f4mproxy', 'script.module.feedparser', 'script.module.metahandler', 'script.module.myconnpy', 'script.module.parsedom', 'script.module.pyamf', 'script.module.simple.downloader', 'script.module.socksipy', 'script.module.t0mm0.common', 'script.module.unidecode', 'script.module.universal', 'script.module.urlresolver']
+        dependencies = ['repository.istream','script.module.requests','script.module.elementtree','script.common.plugin.cache','script.istream.dialogs', 'script.module.addon.common', 'script.module.beautifulsoup', 'script.module.dnspython', 'script.module.f4mproxy', 'script.module.feedparser', 'script.module.metahandler', 'script.module.myconnpy', 'script.module.parsedom', 'script.module.pyamf', 'script.module.simple.downloader', 'script.module.socksipy', 'script.module.t0mm0.common', 'script.module.unidecode', 'script.module.universal', 'script.module.urlresolver']
         
         import glob
 
