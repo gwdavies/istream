@@ -99,7 +99,7 @@ if xbmc_version >= 16.9:
                         'script.module.metahandler','script.module.myconnpy', 'script.module.parsedom',
                         'script.module.pyamf', 'script.module.simple.downloader', 'script.module.socksipy',
                         'script.module.t0mm0.common', 'script.module.unidecode', 'script.module.universal',
-                        'script.module.urlresolver', 'script.icechannel.theme.xunityhd']
+                        'script.module.urlresolver']
         
         import glob
 

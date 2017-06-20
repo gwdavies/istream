@@ -50,7 +50,9 @@
 <setting id="Default_themetype" type="text" label="Theme Type" default="online" visible="false"/>
 <setting id="Default_themeurl" type="text" label="Theme URL" default="http://istreamrepo.me/istream/images/default/" visible="false"/>
 <setting id="Default_themeaddon" type="text" label="Theme Addon" default="" visible="false"/>
-<setting id="theme" type="labelenum" values="Default" label="Theme" default="Default" visible="true"/>
+<setting id="Xunity HD_themetype" type="text" label="Theme Type" default="disk" visible="false"/>
+<setting id="Xunity HD_themeaddon" type="text" label="Theme Addon" default="script.icechannel.theme.xunityhd" visible="false"/>
+<setting id="theme" type="labelenum" values="Default|Xunity HD" label="Theme" default="Default" visible="true"/>
 <setting type="sep"/>
 <setting id="mystream_default" type="bool" label="Go directly to [COLOR royalblue]my[/COLOR]Stream" default="false"/>
 <setting type="sep"/>

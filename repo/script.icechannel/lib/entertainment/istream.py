@@ -507,10 +507,10 @@ def GetMainSection():
                                             'fanart':common.get_themed_icon('tools.jpg')  
                                             } )        
                                             
-    unique_list.append( {'title':'Extensions Installer', 'mode':common.mode_Installer, 'indexer':'installer', 'section':'installer',
+    '''unique_list.append( {'title':'Extensions Installer', 'mode':common.mode_Installer, 'indexer':'installer', 'section':'installer',
                                             'img':common.get_themed_icon('installer.png'),
                                             'fanart':common.get_themed_icon('installer.jpg')  
-                                            } )        
+                                            } ) '''       
                                             
     unique_list.append( {'title':'View End User Agreement', 'mode':common.mode_EULA, 'indexer':'eula', 'section':'eula',
                                             'img':common.get_themed_icon('eula.png'),
