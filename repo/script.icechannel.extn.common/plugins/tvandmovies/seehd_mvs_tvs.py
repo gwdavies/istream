@@ -44,20 +44,42 @@ class seehd(MovieSource,TVShowSource):
 
 
 
+    def googletag(self,url):
+        import re
+        quality = re.compile('itag=(\d*)').findall(url)
+        quality += re.compile('=m(\d*)$').findall(url)
+        try: quality = quality[0]
+        except: return []
+
+        if quality in ['37', '137', '299', '96', '248', '303', '46']:
+            return [{'quality': '1080P', 'url': url}]
+        elif quality in ['22', '84', '136', '298', '120', '95', '247', '302', '45', '102']:
+            return [{'quality': '720P', 'url': url}]
+        elif quality in ['35', '44', '135', '244', '94']:
+            return [{'quality': 'SD', 'url': url}]
+        elif quality in ['18', '34', '43', '82', '100', '101', '134', '243', '93']:
+            return [{'quality': 'SD', 'url': url}]
+        elif quality in ['5', '6', '36', '83', '133', '242', '92', '132']:
+            return [{'quality': 'SD', 'url': url}]
+        else:
+            return []
+
+
+
 
     def GetFileHosts(self, url, list, lock, message_queue, season, episode, type):
 
-        from entertainment import requests
         from entertainment import jsunpack
-        import urlresolver,re
+        from md_request import open_url
+        import urlresolver,re,urllib
 
         referer = url
         
         headers = {'User-Agent':self.User_Agent}
         sources = []
 
-        link = requests.get(url, headers=headers, timeout=15).content
-
+        link = open_url(url, headers=headers, timeout=3).content
+                
         try:
             RES = re.findall(r'Quality:</strong>([^<>]*)<', str(link), re.I|re.DOTALL)[0].upper()
         except:
@@ -94,13 +116,33 @@ class seehd(MovieSource,TVShowSource):
         try:
             iframe_url = re.findall(r'iframe.*?src="([^"]+)"', str(link), re.I|re.DOTALL)
             for url3 in iframe_url:
+                headers = {'User-Agent':self.User_Agent, 'Referer':referer}
                 if 'songs2dl' in url3:
-                    headers = {'User-Agent':self.User_Agent, 'Referer':referer}
-                    link2 = requests.get(url3, headers=headers, timeout=15).content
+                    link2 = open_url(url3, headers=headers, timeout=3).content
                     if jsunpack.detect(link2):
                         js_data = jsunpack.unpack(link2)
                         match = re.findall(r'"file":"([^"]+)".*?"label":"([^"]+)"', str(js_data), re.I|re.DOTALL)
                         self.AddMedia(list,match)
+
+                elif '.php' in url3:
+                    link2 = open_url(url3, headers=headers, timeout=3).content
+                    match = re.findall(r'iframe.*?src="([^"]+)"', str(link2), re.I|re.DOTALL)[0]
+                    link3 = open_url(match, headers=headers, timeout=3).content
+                    match2 = re.findall(r'iframe.*?src="([^"]+)"', str(link3), re.I|re.DOTALL)[0]
+                    match2 = match2.replace('/preview','/view').replace('/edit','/view')
+                    link4 = open_url(match2, headers=headers, verify=False, timeout=3)
+                    match3 = re.compile('itag\\\u003d.*?\\\u0026url\\\u003d(.*?)%3B').findall(link4.content)
+                    for doc_url in match3:
+                        doc_url = urllib.unquote(doc_url)
+                        doc_url = doc_url.replace('\\u003d','=').replace('\\u0026','&')
+                        if 'video/x-flv' in doc_url:
+                                doc_url = doc_url.partition('url=')[2]
+                        for a in self.googletag(doc_url):
+                            cookie = link4.cookies.get_dict()
+                            cookie = urllib.quote('Cookie:DRIVE_STREAM=%s; NID=%s' %(cookie['DRIVE_STREAM'],cookie['NID']))
+                            g_url = a['url'] + '|' + cookie
+                            self.AddFileHost(list, a['quality'], g_url)
+                    
                 
                 else:
                     if urlresolver.HostedMediaFile(url3):
@@ -122,14 +164,14 @@ class seehd(MovieSource,TVShowSource):
 
     def GetFileHostsForContent(self, title, name, year, season, episode, type, list, lock, message_queue):
 
-        from entertainment import requests
+        from md_request import open_url
         import re
 
-        name = self.CleanTextForSearch(name.lower())
+        name = self.CleanTextForSearch(name.lower()).strip()
         search =  '%s/?s=%s' %(self.base_url,name.replace(' ','+'))
         headers = {'User-Agent':self.User_Agent}
-        link = requests.get(search, headers=headers, timeout=15).content
-
+        link = open_url(search, headers=headers, timeout=3).content
+        
         try:
             
             links = link.split('article id=')[2:]

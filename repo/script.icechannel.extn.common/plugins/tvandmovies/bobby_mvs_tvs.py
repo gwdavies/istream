@@ -1,22 +1,24 @@
 '''
-    Cartoon HD Extra   
+    Bobby  
     Copyright (C) 2013 Mikey1234
 '''
 
 from entertainment.plugnplay.interfaces import MovieSource
 from entertainment.plugnplay.interfaces import TVShowSource
 from entertainment.plugnplay import Plugin
+import xbmc
 
 
 
 class bobby(MovieSource,TVShowSource):
+
     implements = [MovieSource,TVShowSource]
     
     name = "BobbyMovies"
     display_name = "Bobby Movies"
 
     source_enabled_by_default = 'true'
-    BASE ='https://bobby.kohimovie.com/jp/2.1.0/'
+    base_url = 'http://webapp.bobbyhd.com' #'https://bobby.kohimovie.com/jp/2.1.0/'
 
 
 
@@ -25,8 +27,7 @@ class bobby(MovieSource,TVShowSource):
 
     
         import re
-        from entertainment.net import Net
-        net = Net(cached=False)
+        from md_request import open_url
 
 
 
@@ -36,15 +37,16 @@ class bobby(MovieSource,TVShowSource):
                 'Accept-Language':'en-gb',
                 'Accept-Encoding':'gzip, deflate',
                 'Connection':'keep-alive'}
-        new_url='http://webapp.bobbyhd.com/player.php?alias='+url
+
+        url = '%s/player.php?alias=%s' %(self.base_url,url)
         
-        link = net.http_GET(new_url,headers=headers).content
+        link = open_url(url,headers=headers,timeout=3).content
+        
         if type=='tv_episodes':
             match=re.compile('changevideo\(\'(.+?)\'\)".+?data-toggle="tab">(.+?)\..+?</a>').findall(link)
-            print match
         else:
             match=re.compile('changevideo\(\'(.+?)\'\)".+?data-toggle="tab">(.+?)</a>').findall(link)
-
+            
         for URL , RES in match:
             if 'webapp' in URL:
                 URL=URL.split('embed=')[1]
@@ -80,11 +82,9 @@ class bobby(MovieSource,TVShowSource):
         
     
         import re
-        from entertainment.net import Net
-        net = Net(cached=False)
+        from md_request import open_url
 
-
-        name=self.CleanTextForSearch(name.lower())
+        name = self.CleanTextForSearch(name.lower()).strip()
         
         headers={'Host':'webapp.bobbyhd.com',
                 'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -92,41 +92,22 @@ class bobby(MovieSource,TVShowSource):
                 'Accept-Language':'en-gb',
                 'Accept-Encoding':'gzip, deflate',
                 'Connection':'keep-alive'}
-
-        new_url='http://webapp.bobbyhd.com/search.php?keyword='+name.replace(' ','+')
         
-        link = net.http_GET(new_url,headers=headers).content
+
+        search = '%s/search.php?keyword=%s' %(self.base_url,name.replace(' ','+'))
+        
+        link = open_url(search,headers=headers,timeout=3).content
      
-        match=re.compile('alias=(.+?)\'">(.+?)</a>').findall(link)
+        match = re.compile('alias=(.+?)\'">(.+?)</a>').findall(link)
         
         for id,TITLE in match:
          
             if type=='tv_episodes':
                 if name.lower() in self.CleanTextForSearch(TITLE.lower()):
                       if season in TITLE:
-                        
-                        self.GetFileHosts(id, list, lock, message_queue,type,episode)
+                          self.GetFileHosts(id, list, lock, message_queue,type,episode)
             else:
-                if name.lower()==self.CleanTextForSearch(TITLE.lower()):                    
+                movie_title = self.CleanTextForSearch(name + ' (%s)' %year)
+                if name == self.CleanTextForSearch(TITLE.lower()) or movie_title == self.CleanTextForSearch(TITLE.lower()):
                     self.GetFileHosts(id, list, lock, message_queue,type,episode)
 
-
-                
-
-    def Resolve(self, url):                 
-        url=url.replace('amp;','')
-        if 'requiressl=yes' in url:
-            url = url.replace('http://', 'https://')
-        from entertainment import istream
-        resolved =istream.ResolveUrl(url)
-        return resolved  
-
-
-
-                
-    
-
-
-
-
-            

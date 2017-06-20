@@ -27,7 +27,7 @@ class hevec(MovieSource,TVShowSource):
 
 
         from entertainment.net import Net
-        import re
+        import re,urlresolver
         net = Net(cached=False)
 
 
@@ -43,7 +43,7 @@ class hevec(MovieSource,TVShowSource):
         for p in link:
            
             try:
-                URL=re.compile('<a href="([^"]+)"').findall(p)[0]
+                final_url = re.compile('<a href="([^"]+)"').findall(p)[0]
 
                 if '4K' in RES.upper():
                     res='4K'
@@ -68,11 +68,11 @@ class hevec(MovieSource,TVShowSource):
                 else:
                     res='720P'
                 
-                HOST = URL.split('//')[1].split('/')[0]
-                if '300mbmoviesdl' not in URL:
-                    if 'multiup' not in URL:
-                        if 'amazon' not in URL:
-                            self.AddFileHost(list, res, URL,host=HOST.upper())
+                HOST = final_url.split('//')[1].split('/')[0]
+                if urlresolver.HostedMediaFile(final_url):
+                    if final_url not in uniques:
+                        uniques.append(final_url)
+                        self.AddFileHost(list, res, final_url,host=HOST.upper())
 
             except:pass   
                     

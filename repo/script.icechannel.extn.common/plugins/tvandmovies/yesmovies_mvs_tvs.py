@@ -18,7 +18,7 @@ s = requests.session()
 
 
 
-class hdonline(MovieSource,TVShowSource):
+class yesmovies(MovieSource,TVShowSource):
 
     implements = [MovieSource,TVShowSource]
 
@@ -32,10 +32,8 @@ class hdonline(MovieSource,TVShowSource):
 
 
 
-    def uncensored(self, data):
-
+    def __uncensored1(self, script):
         import re,xbmc
-        
         xx = ''
         xy = ''
         try:
@@ -73,9 +71,35 @@ param = retA()'''
             data = re.compile('''=['"]([^"^']+?)['"]''').findall(data)
             xx = data[0]
             xy = data[1]
-        except Exception:
-            xbmc.log('Sorry Could Not Decode')
-        return xx, xy
+        except Exception as e:
+            xbmc.log('Exception in x/y decode (1)')
+        return {'x': x, 'y': y}
+
+
+
+
+    def __uncensored2(self, script):
+        from entertainment import jsunfuck
+        import re,xbmc
+        try:
+            js = jsunfuck.JSUnfuck(script).decode()
+            x = re.search('''_x=['"]([^"']+)''', js).group(1)
+            y = re.search('''_y=['"]([^"']+)''', js).group(1)
+            return {'x': x, 'y': y}
+        except Exception as e:
+            xbmc.log('Exception in x/y decode (2)')
+
+
+
+
+    def __uncensored3(self, script):
+        import re,xbmc
+        try:
+            xx = re.search('''_x=['"]([^"']+)''', script).group(1)
+            xy = re.search('''_y=['"]([^"']+)''', script).group(1)
+            return {'x': xx, 'y': xy}
+        except Exception as e:
+            xbmc.log('Exception in xx/xy decode (3)')
 
 
 
@@ -91,16 +115,15 @@ param = retA()'''
 
 
 
-    def AddMedia(self, list, url, xx, xy, referer):
+    def AddMedia(self, list, url, params, referer):
 
         try:
             
-            hash_params = {'x':xx, 'y':xy}
             headers = {'Accept':'application/json, text/javascript, */*; q=0.01',
                        'Accept-Encoding':'gzip, deflate, sdch, br', 'Accept-Language':'en-US,en;q=0.8',
                        'Referer':referer, 'User-Agent':self.User_Agent, 'X-Requested-With':'XMLHttpRequest'}
 
-            final_link = self.open_url(url, hash_params, headers).json()
+            final_link = self.open_url(url, params, headers).json()
 
             data = final_link['playlist'][0]['sources']
 
@@ -182,22 +205,20 @@ param = retA()'''
             headers = {'Accept':'text/javascript, application/javascript, application/ecmascript, application/x-ecmascript, */*; q=0.01',
                        'Accept-Encoding':'gzip, deflate, sdch, br', 'Accept-Language':'en-US,en;q=0.8',
                        'Referer':referer, 'User-Agent':self.User_Agent, 'X-Requested-With':'XMLHttpRequest'}
-            data = ''
-            tries = 0
-            while tries < 10:
-                tries += 1
-                data = self.open_url(slug, params, headers).content
-                if not data:
-                    data = ''
-                    continue
 
-                if '[]' not in data:
-                    time.sleep(1)
-                    break
-
-            xx, xy = self.uncensored(str(data))
+            data = self.open_url(slug, params, headers).content
+            
+            if '$_$' in data:
+                params = self.__uncensored1(data)
+            elif data.startswith('[]') and data.endswith('()'):
+                params = self.__uncensored2(data)
+            else:
+                params = self.__uncensored3(data)
+                
+            if params is None:
+                params = {}
             request_url = '%s/ajax/movie_sources/%s' %(self.base_url, episode_id)
-            self.AddMedia(list, request_url, xx, xy, referer)
+            self.AddMedia(list, request_url, params, referer)
 
 
 

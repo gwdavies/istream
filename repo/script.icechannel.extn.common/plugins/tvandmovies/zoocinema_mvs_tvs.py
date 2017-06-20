@@ -42,6 +42,9 @@ class zoocine(MovieSource,TVShowSource):
                 else:
                     res='DVD'
 
+                if '=download' in final_url:
+                    final_url = final_url.replace('=download','=view')
+
                 self.AddFileHost(list, res, final_url)
 
 
@@ -80,12 +83,24 @@ class zoocine(MovieSource,TVShowSource):
 
                     iframe_url = re.findall(r'iframe.*?src="([^"]+)"', p, re.I|re.DOTALL)[0]
                     if 'extraload' in iframe_url:
-
                         link2 = requests.get(iframe_url,headers=headers).content.decode('utf8')
-                        if jsunpack.detect(link2):
-                            js_data = jsunpack.unpack(link2)
-                            match = re.findall(r'"file":"([^"]+)".*?"label":"([^"]+)"', str(js_data), re.I|re.DOTALL)
-                            self.AddMedia(list,match)
+                        match = ''
+                        if 'JuicyCodes' in link2:
+                            try:
+                                data = re.findall('type="text/javascript">([^<>]*)<', str(link2), re.I|re.DOTALL)[0]
+                                data = data.replace('JuicyCodes.Run(','').replace('"+"','').decode('base64')
+                                js_data = jsunpack.unpack(data)
+                                match = re.findall(r'"file":"([^"]+)".*?"label":"([^"]+)"', str(js_data), re.I|re.DOTALL)
+                            except:pass
+
+                        else:
+                            try:
+                                if jsunpack.detect(link2):
+                                    js_data = jsunpack.unpack(link2)
+                                    match = re.findall(r'"file":"([^"]+)".*?"label":"([^"]+)"', str(js_data), re.I|re.DOTALL)
+                            except:pass
+
+                        self.AddMedia(list,match)
                     
                     elif 'goo.gl' not in iframe_url:
                         if 'youtube' not in iframe_url:
@@ -157,4 +172,14 @@ class zoocine(MovieSource,TVShowSource):
                            self.GetFileHosts(media_url, list, lock, message_queue)
 
             except:pass
+
+
+
+
+    def Resolve(self, url):
+        if '/docs/securesc/' not in url:
+            from entertainment import istream
+            url = istream.ResolveUrl(url)
+        else:
+            return url
  
