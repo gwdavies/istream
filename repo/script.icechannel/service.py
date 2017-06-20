@@ -1,6 +1,6 @@
 # load lib directory
 # begin
-import xbmc,os
+import xbmc,os,shutil
 import re
 xbmc_version =  re.search('^(\d+)', xbmc.getInfoLabel( "System.BuildVersion" ))
 if xbmc_version:
@@ -17,7 +17,7 @@ addonxml=xbmc.translatePath(os.path.join('special://home/addons', 'repository.md
 
 
 
-WRITEME='''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+WRITEREPO = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
         <addon id="repository.istream" name="iSTREAM Repository" version="10.3" provider-name="iSTREAM">
             <extension point="xbmc.addon.repository" name="iSTREAM">
 		<info compressed="false">https://raw.githubusercontent.com/mucky-duck/istream/master/repo/addons.xml</info>
@@ -32,7 +32,7 @@ WRITEME='''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
         </addon>'''
 
 
-WRITEREPO='''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+WRITEME = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="repository.mdrepo" name="Mucky Ducks Repo" version="1.0.1" provider-name="Mucky Duck">
 	<extension point="xbmc.addon.repository" name="Mucky Ducks Repo">
 		<info compressed="false">https://raw.githubusercontent.com/mucky-duck/mdrepo/master/addons.xml</info>
@@ -47,20 +47,32 @@ WRITEREPO='''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 	</extension>
 </addon>'''
 
-if os.path.exists(repoxml) == False:
 
-    if os.path.exists(repo_path) == False:
+old = xbmc.translatePath('special://home/addons/script.icechannel.extn.xunitytalk')
+
+
+if os.path.exists(old):
+    shutil.rmtree(old, ignore_errors=True)
+    xbmc.executebuiltin('UpdateLocalAddons') 
+    xbmc.executebuiltin("UpdateAddonRepos")
+
+
+if not os.path.exists(repoxml):
+
+    if not os.path.exists(repo_path):
         try:
             os.makedirs(repo_path)
         except:pass
 
 
-        f = open(addonxml, mode='w')
+        f = open(repoxml, mode='w')
         f.write(WRITEREPO)
         f.close()
 
-        xbmc.executebuiltin('UpdateLocalAddons') 
+        xbmc.executebuiltin('UpdateLocalAddons')
         xbmc.executebuiltin("UpdateAddonRepos")
+
+        
         
 
 if os.path.exists(addonxml) == False:
@@ -87,7 +99,7 @@ if xbmc_version >= 16.9:
                         'script.module.metahandler','script.module.myconnpy', 'script.module.parsedom',
                         'script.module.pyamf', 'script.module.simple.downloader', 'script.module.socksipy',
                         'script.module.t0mm0.common', 'script.module.unidecode', 'script.module.universal',
-                        'script.module.urlresolver']
+                        'script.module.urlresolver', 'script.icechannel.theme.xunityhd']
         
         import glob
 
