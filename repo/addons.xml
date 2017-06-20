@@ -31,7 +31,6 @@
         <import addon="xbmc.python" version="2.1.0"/>
 		<import addon="script.module.urlresolver" version="0.0.1"/>
 		<import addon="script.module.universal" version="0.0.1" />
-		<import addon="script.module.beautifulsoup" version="0.0.1"/>
 		<import addon="script.module.metahandler" version="0.0.1"/>
 		<import addon="script.module.feedparser" version="0.0.1"/>
 		<import addon="script.module.pyamf" version="0.0.1"/>
@@ -43,7 +42,8 @@
 		<import addon="script.istream.dialogs" version="0.0.1"/>
 		<import addon="script.icechannel.extn.xunity.tv.common" version="0.0.1"/>
 		<import addon="script.module.elementtree" version="1.2.8" />
-		<import addon="script.module.requests" version="0.0.1" />
+		<import addon="script.module.script.module.muckys.common" version="0.0.1" />
+
     </requires>
 	<extension point="xbmc.python.pluginsource" library="plugin.py" >
 		<provides>video</provides>

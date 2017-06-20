@@ -10,38 +10,30 @@ else:
 
 
 addon_path = xbmc.translatePath(os.path.join('special://home/addons', 'script.icechannel.extn.xunitytalk'))
-repo_path = xbmc.translatePath(os.path.join('special://home/addons', 'repository.xunitytalk'))
-repoxml = xbmc.translatePath(os.path.join('special://home/addons', 'repository.xunitytalk','addon.xml'))
+repo_path = xbmc.translatePath(os.path.join('special://home/addons', 'repository.istream'))
+repoxml = xbmc.translatePath(os.path.join('special://home/addons', 'repository.istream','addon.xml'))
 addonxml=xbmc.translatePath(os.path.join('special://home/addons', 'script.icechannel.extn.xunitytalk','addon.xml'))
 
 
 
 
-WRITEME='''<?xml version="1.0" encoding="UTF-8"?>
-        <addon id="script.icechannel.extn.xunitytalk" version="0.0.1" name=".[COLOR blue]X[/COLOR]unity Talk iStream Extensions" provider-name="[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk">
-            <requires>
-                <import addon="xbmc.python" version="2.1.0"/>
-            </requires>
-                <extension library="default.py" point="xbmc.service" />
-                        <summary lang="en">iStream Extensions by xunitytalk.com</summary>
-            <extension point="xbmc.python.module" library="lib" />
-            <extension point="xbmc.addon.metadata">
-                        <description lang="en">iStream Extensions by Xunity Talk Movies Tv Shows Kids Live</description>
-                        <!--<provides>video</provides>-->
-                        <platform></platform>
-                        <language></language>
-                        <license></license>
-                        <forum></forum>
-                        <website></website>
-                        <source></source>
-                        <email></email>
+WRITEME='''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <addon id="repository.istream" name="iSTREAM XBMC Addons Repository" version="11" provider-name="iSTREAM">
+            <extension point="xbmc.addon.repository" name="iSTREAM">
+		<info compressed="false">https://raw.githubusercontent.com/mucky-duck/istream/master/repo/addons.xml</info>
+		<checksum>https://raw.githubusercontent.com/mucky-duck/istream/master/repo/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.githubusercontent.com/mucky-duck/istream/master/repo/zips/</datadir>
             </extension>
-          <extension point="xbmc.service" library="service.py" start="login" />
+            <extension point="xbmc.addon.metadata">
+		<summary>iSTREAM XBMC Addons and Extensions</summary>
+		<description>iSTREAM XBMC Addons and Extensions</description>
+		<platform>all</platform>
+            </extension>
         </addon>'''
 
 
 WRITEREPO='''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.xunitytalk" name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk Repository" version="1.1.1" provider-name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk">
+<addon id="repository." name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk Repository" version="1.1.1" provider-name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk">
 	<extension point="xbmc.addon.repository" name="Mikey1234 Addon Repository">
 		<info compressed="false">http://xtyrepo.me/xunitytalk/addons/addons.xml</info>
 		<checksum>http://xtyrepo.me/xunitytalk/addons/addons.xml.md5</checksum>
@@ -69,7 +61,7 @@ if os.path.exists(repoxml) == False:
         xbmc.executebuiltin("UpdateAddonRepos")
         
 
-if os.path.exists(addonxml) == False:
+'''if os.path.exists(addonxml) == False:
 
     if os.path.exists(addon_path) == False:
         os.makedirs(addon_path)
@@ -80,12 +72,18 @@ if os.path.exists(addonxml) == False:
         f.close()
 
         xbmc.executebuiltin('UpdateLocalAddons') 
-        xbmc.executebuiltin("UpdateAddonRepos")
+        xbmc.executebuiltin("UpdateAddonRepos")'''
 
         
 
 if xbmc_version >= 16.9:
-        dependencies = ['repository.istream','repository.xunitytalk','script.module.requests','script.module.elementtree','script.common.plugin.cache','script.istream.dialogs', 'script.module.addon.common', 'script.module.beautifulsoup', 'script.module.dnspython', 'script.module.f4mproxy', 'script.module.feedparser', 'script.module.metahandler', 'script.module.myconnpy', 'script.module.parsedom', 'script.module.pyamf', 'script.module.simple.downloader', 'script.module.socksipy', 'script.module.t0mm0.common', 'script.module.unidecode', 'script.module.universal', 'script.module.urlresolver']
+        dependencies = ['repository.istream', 'script.module.muckys.common', 'script.module.elementtree',
+                        'script.common.plugin.cache','script.istream.dialogs', 'script.module.addon.common',
+                        'script.module.dnspython', 'script.module.f4mproxy', 'script.module.feedparser',
+                        'script.module.metahandler','script.module.myconnpy', 'script.module.parsedom',
+                        'script.module.pyamf', 'script.module.simple.downloader', 'script.module.socksipy',
+                        'script.module.t0mm0.common', 'script.module.unidecode', 'script.module.universal',
+                        'script.module.urlresolver']
         
         import glob
 
