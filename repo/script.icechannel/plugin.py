@@ -132,6 +132,9 @@ favs = None
 global subs
 subs = None
 
+global tmdb_api_key
+tmdb_api_key = 'f1f59e2a6c8eacbf5c78ad39d0fe17d1'
+
 
 # quality color map
 quality_to_color = {
@@ -529,7 +532,7 @@ def WatchedCallbackwithParams(video_type, name, imdb_id, season, episode, year):
         return
         
     from metahandler import metahandlers
-    metaget=metahandlers.MetaData(tmdb_api_key=api_key)
+    metaget=metahandlers.MetaData(tmdb_api_key=tmdb_api_key)
     
     if not imdb_id or imdb_id == '':
         watched_meta = get_metadata(metaget, video_type, name, vidname=name, year=year, season_num=season, episode_num=episode)
@@ -858,7 +861,7 @@ def GetMetas(metas, metadata_queue, indexer, indexer_id, section, url, type, con
     
     use_meta = True    
     metaget = ''
-    api_key = 'f1f59e2a6c8eacbf5c78ad39d0fe17d1'
+    
     if 'movie' in type:
         use_meta = True if entertainment.GetiStreamSettings(common.settings_Movies, 'metadata_movies') == 'true' else False
     elif 'tv' in type:
@@ -866,7 +869,7 @@ def GetMetas(metas, metadata_queue, indexer, indexer_id, section, url, type, con
     
     if use_meta == True and not metaget:
         from metahandler import metahandlers
-        metaget=metahandlers.MetaData(tmdb_api_key=api_key)
+        metaget=metahandlers.MetaData(tmdb_api_key=tmdb_api_key)
     
     import xbmcgui
     mainWindow = xbmcgui.Window(10000)
@@ -894,7 +897,7 @@ def GetMetas(metas, metadata_queue, indexer, indexer_id, section, url, type, con
                 
             if use_meta == True and not metaget:
                 from metahandler import metahandlers
-                metaget=metahandlers.MetaData(tmdb_api_key=api_key)
+                metaget=metahandlers.MetaData(tmdb_api_key=tmdb_api_key)
         
         if indexer == common.indxr_Lists or 'list' in section or item_fav == 'true':
             if video_type == common.VideoType_Movies:
@@ -904,7 +907,7 @@ def GetMetas(metas, metadata_queue, indexer, indexer_id, section, url, type, con
 
             if use_meta == True and not metaget:
                 from metahandler import metahandlers
-                metaget=metahandlers.MetaData(tmdb_api_key=api_key)
+                metaget=metahandlers.MetaData(tmdb_api_key=tmdb_api_key)
 
         if use_meta == True:
 
@@ -961,7 +964,7 @@ def GetSection(indexer, indexer_id, section, url, type, page='', total_pages='',
         
     if use_meta == True:
         from metahandler import metahandlers
-        metaget=metahandlers.MetaData(tmdb_api_key=api_key)
+        metaget=metahandlers.MetaData(tmdb_api_key=tmdb_api_key)
     
     content_items = [ci for ci in items if ci['mode'] not in (common.mode_Dummy, common.mode_Info, common.mode_Section) ]
     content_items_count = len(content_items)
@@ -1062,7 +1065,7 @@ def GetSection(indexer, indexer_id, section, url, type, page='', total_pages='',
                     
                 if use_meta == True and not metaget:
                     from metahandler import metahandlers
-                    metaget=metahandlers.MetaData(tmdb_api_key=api_key)
+                    metaget=metahandlers.MetaData(tmdb_api_key=tmdb_api_key)
             
             if (indexer == common.indxr_Lists or 'list' in section or item_fav == 'true') and item.get('mode', "") not in (common.mode_Dummy, common.mode_Info, common.mode_Section):
                 if video_type == common.VideoType_Movies:
@@ -1072,7 +1075,7 @@ def GetSection(indexer, indexer_id, section, url, type, page='', total_pages='',
 
                 if use_meta == True and not metaget:
                     from metahandler import metahandlers
-                    metaget=metahandlers.MetaData(tmdb_api_key=api_key)
+                    metaget=metahandlers.MetaData(tmdb_api_key=tmdb_api_key)
 
             if use_meta == True:                
                 this_meta = this_metas[content_items_loop]
@@ -1252,7 +1255,7 @@ def GetContent(indexer, indexer_id, url, title, name, year, season, episode, typ
         
     if use_meta == True:
         from metahandler import metahandlers
-        metaget=metahandlers.MetaData(tmdb_api_key=api_key)
+        metaget=metahandlers.MetaData(tmdb_api_key=tmdb_api_key)
         
     totalitems = len(items)
     
@@ -1283,7 +1286,7 @@ def GetContent(indexer, indexer_id, url, title, name, year, season, episode, typ
                 
             if use_meta == True and not metaget:
                 from metahandler import metahandlers
-                metaget=metahandlers.MetaData(tmdb_api_key=api_key)
+                metaget=metahandlers.MetaData(tmdb_api_key=tmdb_api_key)
 
         
         if use_meta == True:                                
@@ -1806,7 +1809,7 @@ def Search(indexer, type, page='', total_pages='', search_term='', individual_to
             
         if use_meta == True:
             from metahandler import metahandlers
-            metaget=metahandlers.MetaData(tmdb_api_key=api_key)
+            metaget=metahandlers.MetaData(tmdb_api_key=tmdb_api_key)
         
         totalitems = len(items)
         
@@ -1875,7 +1878,7 @@ def Search(indexer, type, page='', total_pages='', search_term='', individual_to
                         
                     if use_meta == True and not metaget:
                         from metahandler import metahandlers
-                        metaget=metahandlers.MetaData(tmdb_api_key=api_key)
+                        metaget=metahandlers.MetaData(tmdb_api_key=tmdb_api_key)
 
                 
                 if use_meta == True:                                
@@ -2854,7 +2857,7 @@ else:
     elif mode == common.mode_Change_Watched:
         entertainment.loadiStreamPlugins(load_settings=True)
         from metahandler import metahandlers
-        metaget=metahandlers.MetaData(tmdb_api_key=api_key)
+        metaget=metahandlers.MetaData(tmdb_api_key=tmdb_api_key)
         metaget.change_watched(type, name, imdb_id, season=season, episode=episode, year=year)
 
         if entertainment.GetiStreamSettings(common.settings_XBMC_Integration,'sync_watched_status_with_lib') == 'true':
@@ -2862,7 +2865,7 @@ else:
         xbmc.executebuiltin("Container.Refresh")
     elif mode == common.mode_Refresh_Meta:
         from metahandler import metahandlers
-        metaget=metahandlers.MetaData(tmdb_api_key=api_key)
+        metaget=metahandlers.MetaData(tmdb_api_key=tmdb_api_key)
         
         if type in (common.VideoType_Movies, common.VideoType_TV):        
             search_title = name
@@ -2946,7 +2949,7 @@ else:
                         xbmc.sleep(250)
                         
                     from metahandler import metahandlers
-                    metaget=metahandlers.MetaData(tmdb_api_key=api_key)
+                    metaget=metahandlers.MetaData(tmdb_api_key=tmdb_api_key)
                     
                     for new_item in new_items:
                     
@@ -3033,7 +3036,7 @@ else:
                                 xbmc.sleep(250)
                                 
                             from metahandler import metahandlers
-                            metaget=metahandlers.MetaData(tmdb_api_key=api_key)
+                            metaget=metahandlers.MetaData(tmdb_api_key=tmdb_api_key)
                             
                             for new_item in new_items:
                             
@@ -3097,7 +3100,7 @@ else:
         totalitems = len(subs_data)
             
         from metahandler import metahandlers
-        metaget=metahandlers.MetaData(tmdb_api_key=api_key)
+        metaget=metahandlers.MetaData(tmdb_api_key=tmdb_api_key)
         
         subs_cleaned = 0
         
@@ -3140,7 +3143,7 @@ else:
             metaget = None
             if entertainment.GetiStreamSettings(common.settings_XBMC_Integration,'clean_up_while_update_subs') == 'true':
                 from metahandler import metahandlers
-                metaget=metahandlers.MetaData(tmdb_api_key=api_key)
+                metaget=metahandlers.MetaData(tmdb_api_key=tmdb_api_key)
                 
             subs_data = subs.get_subscriptions( indexer, type, video_type )
             
@@ -3234,7 +3237,7 @@ else:
                     
                     if not metaget:
                         from metahandler import metahandlers
-                        metaget=metahandlers.MetaData(tmdb_api_key=api_key)
+                        metaget=metahandlers.MetaData(tmdb_api_key=tmdb_api_key)
                     
                     for new_item in all_new_items:
                     
@@ -3311,7 +3314,7 @@ else:
             
         if use_meta == True:
             from metahandler import metahandlers
-            metaget=metahandlers.MetaData(tmdb_api_key=api_key)
+            metaget=metahandlers.MetaData(tmdb_api_key=tmdb_api_key)
             
         totalitems = len(subs_data)
         

@@ -50,7 +50,9 @@ WRITEREPO='''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 if os.path.exists(repoxml) == False:
 
     if os.path.exists(repo_path) == False:
-        os.makedirs(repo_path)
+        try:
+            os.makedirs(repo_path)
+        except:pass
 
 
         f = open(addonxml, mode='w')
@@ -64,7 +66,9 @@ if os.path.exists(repoxml) == False:
 if os.path.exists(addonxml) == False:
 
     if os.path.exists(main_path) == False:
-        os.makedirs(main_path)
+        try:
+            os.makedirs(main_path)
+        except:pass
 
 
         f = open(addonxml, mode='w')
