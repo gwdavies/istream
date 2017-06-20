@@ -63,8 +63,8 @@ if os.path.exists(repoxml) == False:
 
 if os.path.exists(addonxml) == False:
 
-    if os.path.exists(addon_path) == False:
-        os.makedirs(addon_path)
+    if os.path.exists(main_path) == False:
+        os.makedirs(main_path)
 
 
         f = open(addonxml, mode='w')
