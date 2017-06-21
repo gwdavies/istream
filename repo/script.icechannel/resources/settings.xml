@@ -48,7 +48,7 @@
 <setting id="plugins_dirs_ltvs" type="text" label="Plugins Dirs_ltvs" default="" visible="false"/>
 <setting id="plugins_dirs_lsps" type="text" label="Plugins Dirs_lsps" default="" visible="false"/>
 <setting id="Default_themetype" type="text" label="Theme Type" default="online" visible="false"/>
-<setting id="Default_themeurl" type="text" label="Theme URL" default="http://istreamrepo.me/istream/images/default/" visible="false"/>
+<setting id="Default_themeurl" type="text" label="Theme URL" default="https://raw.githubusercontent.com/mucky-duck/istream/master/images/default/" visible="false"/>
 <setting id="Default_themeaddon" type="text" label="Theme Addon" default="" visible="false"/>
 <setting id="Xunity HD_themetype" type="text" label="Theme Type" default="disk" visible="false"/>
 <setting id="Xunity HD_themeaddon" type="text" label="Theme Addon" default="script.icechannel.theme.xunityhd" visible="false"/>

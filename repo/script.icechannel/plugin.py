@@ -643,8 +643,8 @@ def GetIStream(show_mystream=True):
 def GetMyStream(show_istream=True):
     
     if show_istream==True:
-        item_query_dict = {'istream_path':'', 'indexer':'istream', 'mode':common.mode_iStream, 'section':'istream', 'title': 'iStream', 'img':common.get_themed_icon('istream.png'), 'fanart':common.get_themed_icon('istream.jpg')}
-        common.addon.add_directory(item_query_dict, {'title': '[B][COLOR royalblue]i[/COLOR]Stream[/B]'}, img=common.get_themed_icon('istream.png'), fanart=common.get_themed_icon('istream.jpg'))
+        item_query_dict = {'istream_path':'', 'indexer':'istream', 'mode':common.mode_iStream, 'section':'istream', 'title': 'iStream', 'img':common.get_themed_icon('mystream.png'), 'fanart':common.get_themed_fanart('mystream.jpg')}
+        common.addon.add_directory(item_query_dict, {'title': '[B][COLOR royalblue]i[/COLOR]Stream[/B]'}, img=common.get_themed_icon('mystream.png'), fanart=common.get_themed_fanart('mystream.jpg'))
     
     from entertainment.mystream import MyStream
     mystream = MyStream()
@@ -823,7 +823,7 @@ def GetIndexers(indexer):
             
     if indexer == common.indxr_TV_Shows:
         subs_img = common.get_themed_icon('subscriptions.png')
-        subs_fanart = common.get_themed_icon('subscriptions.jpg')
+        subs_fanart = common.get_themed_fanart('subscriptions.jpg')
         item_query_dict = {'istream_path':istream_path + ' : ' + 'Subscriptions','mode':common.mode_Manage_Subs, 'indexer':indexer, 'type':'tv_seasons', 'video_type':common.VideoType_TV,
             'title':'Subscriptions', 'img':subs_img, 'fanart':subs_fanart}
         istream_query_dict = {'istream_path':istream_path + ' : ' + 'Subscriptions','mode':common.mode_Add_to_MyStream, 'item_mode':common.mode_Manage_Subs, 'indexer':indexer, 'type':'tv_seasons', 'video_type':common.VideoType_TV,
@@ -833,7 +833,7 @@ def GetIndexers(indexer):
         common.addon.add_directory(item_query_dict, {'title': 'Subscriptions'}, img=subs_img, fanart=subs_fanart, contextmenu_items=contextMenuItems )
     elif indexer == common.indxr_Lists:
         pl_img = common.get_themed_icon('playlists.png')
-        pl_fanart = common.get_themed_icon('playlists.jpg')
+        pl_fanart = common.get_themed_fanart('playlists.jpg')
         item_query_dict = {'istream_path':istream_path + ' : ' + 'Playlists','title':'Playlists', 'mode':common.mode_File_Stores, 'indexer':'file_stores', 'section':'file_stores',
             'img':pl_img, 'fanart':pl_fanart}
         istream_query_dict = {'istream_path':istream_path + ' : ' + 'Playlists','title':'Playlists', 'mode':common.mode_Add_to_MyStream, 'item_mode':common.mode_File_Stores, 'indexer':'file_stores', 'section':'file_stores',
@@ -1006,7 +1006,7 @@ def GetSection(indexer, indexer_id, section, url, type, page='', total_pages='',
                 common.addon.add_directory( { 'indexer':item['indexer'], 'indexer_id':indexer_id, 'mode':common.mode_Section, 'section':item.get('section',''), 
                     'url':item.get('url', ''), 'type':item.get('type', ''), 'page':curr_page, 'total_pages': curr_page_count, 'title':urllib.quote_plus(title),
                     'sort_by': curr_sort_by, 'sort_order':currt_sort_order, 'ui_item_mode':'gotopage' }, {'title': '[COLOR white][B]Page ' + curr_page + ' of ' + curr_page_count + '[/B][/COLOR]' }, 
-                    img=common.get_themed_icon('page.png') ) 
+                    img=common.get_themed_icon('page.png'), fanart=common.get_themed_fanart('page.jpg') ) 
                 
             if curr_sort_by != '':
                 sort_by_options = entertainment.GetSortByOptions(indexer, indexer_id)
@@ -1014,7 +1014,7 @@ def GetSection(indexer, indexer_id, section, url, type, page='', total_pages='',
                 common.addon.add_directory( { 'indexer':item['indexer'], 'indexer_id':indexer_id, 'mode':common.mode_Section, 'section':item.get('section',''), 
                 'url':item.get('url', ''), 'type':item.get('type', ''), 'page':curr_page, 'total_pages': curr_page_count, 'title':urllib.quote_plus(title),
                 'sort_by': curr_sort_by, 'sort_order':currt_sort_order, 'ui_item_mode':'sortby' }, {'title': '[B][COLOR white]Sort By: [/COLOR][COLOR yellow]' + curr_sort_by_title + '[/COLOR][/B]' },
-                img=common.get_themed_icon('sort.png') ) 
+                img=common.get_themed_icon('sort.png'), fanart=common.get_themed_fanart('sort.jpg') ) 
                 
             if currt_sort_order != '':
                 sort_order_options = entertainment.GetSortOrderOptions(indexer, indexer_id)
@@ -1022,18 +1022,18 @@ def GetSection(indexer, indexer_id, section, url, type, page='', total_pages='',
                 common.addon.add_directory( { 'indexer':item['indexer'], 'indexer_id':indexer_id, 'mode':common.mode_Section, 'section':item.get('section',''), 
                 'url':item.get('url', ''), 'type':item.get('type', ''), 'page':curr_page, 'total_pages': curr_page_count, 'title':urllib.quote_plus(title),
                 'sort_by': curr_sort_by, 'sort_order':currt_sort_order, 'ui_item_mode':'sortorder' }, {'title': '[B][COLOR white]Sort Order: [/COLOR][COLOR yellow]' + currt_sort_order_title + '[/COLOR][/B]' },
-                img=common.get_themed_icon('sort.png') ) 
+                img=common.get_themed_icon('sort.png'), fanart=common.get_themed_fanart('sort.jpg') ) 
                 
             if curr_page != '' and curr_page != '1':
                 common.addon.add_directory( { 'indexer':item['indexer'], 'indexer_id':indexer_id, 'mode':common.mode_Section, 'section':item.get('section',''), 
                 'url':item.get('url', ''), 'type':item.get('type', ''), 'page': '1', 'total_pages': curr_page_count, 'title':urllib.quote_plus(title),
                 'sort_by': curr_sort_by, 'sort_order':currt_sort_order }, {'title': '[COLOR white][B]<< First Page[/B][/COLOR]' },
-                img=common.get_themed_icon('firstpage.png') ) 
+                img=common.get_themed_icon('firstpage.png'), fanart=common.get_themed_fanart('firstpage.jpg') ) 
                 
                 common.addon.add_directory( { 'indexer':item['indexer'], 'indexer_id':indexer_id, 'mode':common.mode_Section, 'section':item.get('section',''), 
                 'url':item.get('url', ''), 'type':item.get('type', ''), 'page': str(int(curr_page) - 1), 'total_pages': curr_page_count, 'title':urllib.quote_plus(title),
                 'sort_by': curr_sort_by, 'sort_order':currt_sort_order }, {'title': '[COLOR white][B]< Previous Page[/B][/COLOR]' },
-                img=common.get_themed_icon('previouspage.png') ) 
+                img=common.get_themed_icon('previouspage.png'), fanart=common.get_themed_fanart('previouspage.jpg') ) 
                 
             if curr_page != curr_page_count:
                 next_page_dict = { 'indexer':item['indexer'], 'indexer_id':indexer_id, 'mode':common.mode_Section, 'section':item.get('section',''), 
@@ -1190,11 +1190,11 @@ def GetSection(indexer, indexer_id, section, url, type, page='', total_pages='',
                 
     if next_page_dict:
         common.addon.add_directory(next_page_dict, {'title': '[COLOR white][B]Next Page >[/B][/COLOR]'},
-            img=common.get_themed_icon('nextpage.png') ) 
+            img=common.get_themed_icon('nextpage.png'), fanart=common.get_themed_fanart('nextpage.jpg') ) 
         
     if last_page_dict:
         common.addon.add_directory(last_page_dict, {'title': '[COLOR white][B]Last Page >>[/B][/COLOR]'},
-            img=common.get_themed_icon('lastpage.png') ) 
+            img=common.get_themed_icon('lastpage.png'), fanart=common.get_themed_fanart('lastpage.jpg') ) 
         
     if section == 'main':
         if indexer == common.indxr_TV_Shows:
@@ -1204,16 +1204,17 @@ def GetSection(indexer, indexer_id, section, url, type, page='', total_pages='',
                 'title':'Subscriptions'}
             contextMenuItems = []
             contextMenuItems.insert( 0 , ('[COLOR green]Add[/COLOR] to [B][COLOR royalblue]my[/COLOR]Stream[/B]', 'RunPlugin(%s)' % common.addon.build_plugin_url(istream_query_dict)))            
-            common.addon.add_directory(item_query_dict, {'title': 'Subscriptions'}, contextmenu_items=contextMenuItems )
+            common.addon.add_directory(item_query_dict, {'title': 'Subscriptions'}, contextmenu_items=contextMenuItems, img=common.get_themed_icon('subscriptions.png'), fanart=common.get_themed_fanart('subscriptions.jpg') )
             
         search_item = entertainment.GetSearchItem(indexer)
+        
         if search_item and len(search_item) > 0:
             search_item = search_item[0]
             item_query_dict = {'istream_path':istream_path + ' : ' + search_item['title'],'indexer':search_item['indexer'], 'indexer_id':search_item['indexer_id'], 'mode':search_item['mode'], 'section':search_item['section']}
             istream_query_dict = {'istream_path':istream_path + ' : ' + search_item['title'],'indexer':search_item['indexer'], 'indexer_id':search_item['indexer_id'], 'mode':common.mode_Add_to_MyStream, 'item_mode':search_item['mode'], 'section':search_item['section']}
             contextMenuItems = []
             contextMenuItems.insert( 0 , ('[COLOR green]Add[/COLOR] to [B][COLOR royalblue]my[/COLOR]Stream[/B]', 'RunPlugin(%s)' % common.addon.build_plugin_url(istream_query_dict)))            
-            common.addon.add_directory(item_query_dict, {'title': search_item['title']}, contextmenu_items=contextMenuItems )
+            common.addon.add_directory(item_query_dict, {'title': search_item['title']}, contextmenu_items=contextMenuItems, img=common.get_themed_icon('search.png'), fanart=common.get_themed_fanart('search.jpg') )
     
     try:
         DialogiStreamProgress.close()
@@ -1694,7 +1695,7 @@ def Settings(section = ''):
             istream_query_dict = {'istream_path':istream_path + ' : ' + item['name'],'mode':common.mode_Add_to_MyStream, 'item_mode':common.mode_Settings, 'title': item['name'], 'settings_section':item['id'], 'type':item.get('type','')}
             contextMenuItems = []
             contextMenuItems.insert( 0 , ('[COLOR green]Add[/COLOR] to [B][COLOR royalblue]my[/COLOR]Stream[/B]', 'RunPlugin(%s)' % common.addon.build_plugin_url(istream_query_dict)))            
-            common.addon.add_directory(item_query_dict, {'title': item['name']}, contextmenu_items=contextMenuItems )
+            common.addon.add_directory(item_query_dict, {'title': item['name']}, img=item['img'], fanart=item['fanart'], contextmenu_items=contextMenuItems )
                 
         setViewForMode(mode)
         common.addon.end_of_directory()
@@ -3418,14 +3419,14 @@ else:
         
         if len(file_ids) > 0:
             common.addon.add_directory({'istream_path':istream_path + ' : ' + 'Playlists added as iStream source...', 'indexer':indexer, 'mode':common.mode_Play_Lists, 'section':section, 'title': 'Playlists'}, 
-                { 'title': '[B][COLOR yellow]Playlists added as [COLOR royalblue]i[/COLOR]Stream source...[/B][/COLOR]' } )
+                { 'title': '[B][COLOR yellow]Playlists added as [COLOR royalblue]i[/COLOR]Stream source...[/B][/COLOR]' }, img=common.get_themed_icon('playlists.png'), fanart=common.get_themed_fanart('playlists.jpg') )
             
         stores = filestore.get_filestores()
         
         common.addon.add_directory({'istream_path':istream_path + ' : ' + 'Add Online Playlist', 'indexer':indexer, 'mode':common.mode_Add_Http_File_Store, 'section':section, 
-            'title': 'Add Online Playlist'}, { 'title': '[B][COLOR white]Add Online Playlist[/COLOR][/B]' } )
+            'title': 'Add Online Playlist'}, { 'title': '[B][COLOR white]Add Online Playlist[/COLOR][/B]' }, img=common.get_themed_icon('playlists.png'), fanart=common.get_themed_fanart('playlists.jpg') )
         common.addon.add_directory({'istream_path':istream_path + ' : ' + 'Add Local Playlist', 'indexer':indexer, 'mode':common.mode_Add_Local_File_Store, 'section':section, 
-            'title': 'Add Local Playlist'}, { 'title': '[B][COLOR white]Add Local Playlist[/COLOR][/B]' } )
+            'title': 'Add Local Playlist'}, { 'title': '[B][COLOR white]Add Local Playlist[/COLOR][/B]' }, img=common.get_themed_icon('playlists.png'), fanart=common.get_themed_fanart('playlists.jpg') )
 
         file_objs = {}
         

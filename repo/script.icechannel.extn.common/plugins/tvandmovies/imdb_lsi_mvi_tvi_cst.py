@@ -17,6 +17,7 @@ class IMDb(MovieIndexer, TVShowIndexer, CustomSettings, ListIndexer):
     
     
     img = common.get_themed_icon('imdb.png')
+    fanart = common.get_themed_fanart('imdb.jpg')
     
     default_indexer_enabled = 'true'
     
@@ -459,34 +460,34 @@ class IMDb(MovieIndexer, TVShowIndexer, CustomSettings, ListIndexer):
             if indexer == common.indxr_Movies:
                 #self.AddSection(list, indexer, 'a_z', 'A-Z')
                 
-                self.AddSection(list, indexer, 'moviemeter', 'Most Popular', self.get_url()+'search/title?' + url_filter + url_type, indexer, img=common.get_themed_icon('imdb_pop.png'))
-                self.AddSection(list, indexer, 'genres', 'Genres', img=common.get_themed_icon('genres.png'))
-                self.AddSection(list, indexer, 'boxoffice_gross_us', 'Box Office', self.get_url()+'search/title?' + url_filter + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_box.png'))
-                self.AddSection(list, indexer, 'year', 'Box Office By Year', img=common.get_themed_icon('imdb_year.png'))
-                self.AddSection(list, indexer, 'decade', 'Box Office By Decade', img=common.get_themed_icon('imdb_dec.png'))
-                self.AddSection(list, indexer, 'user_rating', 'Highly Rated', self.get_url()+'search/title?' + url_filter_rated + url_type + 'sort=user_rating,desc', indexer, img=common.get_themed_icon('imdb_high.png'))
-                self.AddSection(list, indexer, 'top_250', 'IMDb Top 250', self.get_url()+'search/title?' + url_filter_small + url_type + 'groups=top_250&sort=user_rating,desc', indexer, img=common.get_themed_icon('imdb_250.png'))
-                self.AddSection(list, indexer, 'num_votes', 'Most Voted', self.get_url()+'search/title?' + url_filter + url_type + 'sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_vote.png'))
+                self.AddSection(list, indexer, 'moviemeter', 'Most Popular', self.get_url()+'search/title?' + url_filter + url_type, indexer, img=common.get_themed_icon('imdb_pop.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                self.AddSection(list, indexer, 'genres', 'Genres', img=common.get_themed_icon('imdb_genres.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                self.AddSection(list, indexer, 'boxoffice_gross_us', 'Box Office', self.get_url()+'search/title?' + url_filter + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_box.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                self.AddSection(list, indexer, 'year', 'Box Office By Year', img=common.get_themed_icon('imdb_year.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                self.AddSection(list, indexer, 'decade', 'Box Office By Decade', img=common.get_themed_icon('imdb_dec.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                self.AddSection(list, indexer, 'user_rating', 'Highly Rated', self.get_url()+'search/title?' + url_filter_rated + url_type + 'sort=user_rating,desc', indexer, img=common.get_themed_icon('imdb_high.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                self.AddSection(list, indexer, 'top_250', 'IMDb Top 250', self.get_url()+'search/title?' + url_filter_small + url_type + 'groups=top_250&sort=user_rating,desc', indexer, img=common.get_themed_icon('imdb_250.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                self.AddSection(list, indexer, 'num_votes', 'Most Voted', self.get_url()+'search/title?' + url_filter + url_type + 'sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_vote.png'), fanart=common.get_themed_fanart('imdb.jpg'))
 
-                self.AddSection(list, indexer, 'kids', 'Kids Zone', self.get_url()+'search/title?' + url_filter_small + 'certificates=us:g&genres=family&' + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_kids.png'))
-                self.AddSection(list, indexer, 'now-playing-us', 'Now Playing', self.get_url()+'search/title?' + url_filter_less + url_type + 'groups=now-playing-us&sort=release_date_us,desc', indexer, img=common.get_themed_icon('imdb_play.png'))
+                self.AddSection(list, indexer, 'kids', 'Kids Zone', self.get_url()+'search/title?' + url_filter_small + 'certificates=us:g&genres=family&' + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_kids.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                self.AddSection(list, indexer, 'now-playing-us', 'Now Playing', self.get_url()+'search/title?' + url_filter_less + url_type + 'groups=now-playing-us&sort=release_date_us,desc', indexer, img=common.get_themed_icon('imdb_play.png'), fanart=common.get_themed_fanart('imdb.jpg'))
 
                 #added list of companies and award list
-                self.AddSection(list, indexer, 'company', 'Company Lists', img=common.get_themed_icon('imdb_comp.png'))
-                self.AddSection(list, indexer, 'award_lists', 'Award Lists', img=common.get_themed_icon('imdb_awa.png'))
-                self.AddSection(list, indexer, 'search_celeb', 'Celebrity Search', self.get_url()+'find?q=', indexer, img=common.get_themed_icon('imdb_cel.png'))
+                self.AddSection(list, indexer, 'company', 'Company Lists', img=common.get_themed_icon('imdb_comp.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                self.AddSection(list, indexer, 'award_lists', 'Award Lists', img=common.get_themed_icon('imdb_awa.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                self.AddSection(list, indexer, 'search_celeb', 'Celebrity Search', self.get_url()+'find?q=', indexer, img=common.get_themed_icon('imdb_cel.png'), fanart=common.get_themed_fanart('imdb.jpg'))
 
             #added filters to commands for tv shows.
             elif indexer == common.indxr_TV_Shows:
                 #self.AddSection(list, indexer, 'a_z', 'A-Z')
-                self.AddSection(list, indexer, 'moviemeter', 'Most Popular', self.get_url()+'search/title?' + url_filter + url_type, indexer, img=common.get_themed_icon('imdb_pop.png'))
-                self.AddSection(list, indexer, 'genres', 'Genres', img=common.get_themed_icon('genres.png'))
-                self.AddSection(list, indexer, 'num_votes', 'Most Voted', self.get_url()+'search/title?' + url_filter + url_type + 'sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_vote.png'))
-                self.AddSection(list, indexer, 'year', 'Most Voted By Year', img=common.get_themed_icon('imdb_year.png'))
-                self.AddSection(list, indexer, 'decade', 'Most Voted By Decade', img=common.get_themed_icon('imdb_dec.png'))
-                self.AddSection(list, indexer, 'user_rating', 'Highly Rated', self.get_url()+'search/title?' + url_filter_rated + url_type + 'sort=user_rating,desc', indexer, img=common.get_themed_icon('imdb_high.png'))
-                self.AddSection(list, indexer, 'award_lists', 'Award Lists', img=common.get_themed_icon('imdb_awa.png'))
-                self.AddSection(list, indexer, 'search_celeb', 'Celebrity Search', self.get_url()+'find?q=', indexer, img=common.get_themed_icon('imdb_cel.png'))
+                self.AddSection(list, indexer, 'moviemeter', 'Most Popular', self.get_url()+'search/title?' + url_filter + url_type, indexer, img=common.get_themed_icon('imdb_pop.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                self.AddSection(list, indexer, 'genres', 'Genres', img=common.get_themed_icon('imdb_genres.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                self.AddSection(list, indexer, 'num_votes', 'Most Voted', self.get_url()+'search/title?' + url_filter + url_type + 'sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_vote.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                self.AddSection(list, indexer, 'year', 'Most Voted By Year', img=common.get_themed_icon('imdb_year.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                self.AddSection(list, indexer, 'decade', 'Most Voted By Decade', img=common.get_themed_icon('imdb_dec.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                self.AddSection(list, indexer, 'user_rating', 'Highly Rated', self.get_url()+'search/title?' + url_filter_rated + url_type + 'sort=user_rating,desc', indexer, img=common.get_themed_icon('imdb_high.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                self.AddSection(list, indexer, 'award_lists', 'Award Lists', img=common.get_themed_icon('imdb_awa.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                self.AddSection(list, indexer, 'search_celeb', 'Celebrity Search', self.get_url()+'find?q=', indexer, img=common.get_themed_icon('imdb_cel.png'), fanart=common.get_themed_fanart('imdb.jpg'))
               
                 
         elif section == 'genres':
@@ -558,39 +559,39 @@ class IMDb(MovieIndexer, TVShowIndexer, CustomSettings, ListIndexer):
         #the sort order can be changed by all of the lists.
         elif section == 'decade':
                 if indexer == common.indxr_Movies:
-                    self.AddSection(list, indexer, '2010s', '2010-2016', self.get_url()+'search/title?' +'release_date=2010,2016&' + url_filter_less + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_dec.png'))
-                    self.AddSection(list, indexer, '2000s', '2000-2009', self.get_url()+'search/title?' +'release_date=2000,2009&' + url_filter_less + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_dec.png'))
-                    self.AddSection(list, indexer, '1990s', '1990-1999', self.get_url()+'search/title?' +'release_date=1990,1999&' + url_filter_less + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_dec.png'))
-                    self.AddSection(list, indexer, '1980s', '1980-1989', self.get_url()+'search/title?' +'release_date=1980,1989&' + url_filter_less + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_dec.png'))
-                    self.AddSection(list, indexer, '1970s', '1970-1979', self.get_url()+'search/title?' +'release_date=1970,1979&' + url_filter_less + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_dec.png'))
-                    self.AddSection(list, indexer, '1960s', '1960-1969', self.get_url()+'search/title?' +'release_date=1960,1969&' + url_filter_less + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_dec.png'))
-                    self.AddSection(list, indexer, '1950s', '1950-1959', self.get_url()+'search/title?' +'release_date=1950,1959&' + url_filter_less + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_dec.png'))
-                    self.AddSection(list, indexer, '1940s', '1940-1949', self.get_url()+'search/title?' +'release_date=1940,1949&' + url_filter_less + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_dec.png'))
-                    self.AddSection(list, indexer, '1930s', '1930-1939', self.get_url()+'search/title?' +'release_date=1930,1939&' + url_filter_less + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_dec.png'))
-                    self.AddSection(list, indexer, '1920s', '1920-1929', self.get_url()+'search/title?' +'release_date=1920,1929&' + url_filter_less + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_dec.png'))
-                    self.AddSection(list, indexer, '1910s', '1910-1919', self.get_url()+'search/title?' +'release_date=1910,1919&' + url_filter_small + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_dec.png'))
+                    self.AddSection(list, indexer, '2010s', '2010-2016', self.get_url()+'search/title?' +'release_date=2010,2016&' + url_filter_less + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_dec.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, '2000s', '2000-2009', self.get_url()+'search/title?' +'release_date=2000,2009&' + url_filter_less + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_dec.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, '1990s', '1990-1999', self.get_url()+'search/title?' +'release_date=1990,1999&' + url_filter_less + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_dec.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, '1980s', '1980-1989', self.get_url()+'search/title?' +'release_date=1980,1989&' + url_filter_less + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_dec.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, '1970s', '1970-1979', self.get_url()+'search/title?' +'release_date=1970,1979&' + url_filter_less + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_dec.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, '1960s', '1960-1969', self.get_url()+'search/title?' +'release_date=1960,1969&' + url_filter_less + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_dec.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, '1950s', '1950-1959', self.get_url()+'search/title?' +'release_date=1950,1959&' + url_filter_less + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_dec.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, '1940s', '1940-1949', self.get_url()+'search/title?' +'release_date=1940,1949&' + url_filter_less + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_dec.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, '1930s', '1930-1939', self.get_url()+'search/title?' +'release_date=1930,1939&' + url_filter_less + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_dec.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, '1920s', '1920-1929', self.get_url()+'search/title?' +'release_date=1920,1929&' + url_filter_less + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_dec.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, '1910s', '1910-1919', self.get_url()+'search/title?' +'release_date=1910,1919&' + url_filter_small + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_dec.png'), fanart=common.get_themed_fanart('imdb.jpg'))
 
                 elif indexer == common.indxr_TV_Shows:
-                    self.AddSection(list, indexer, '2010s', '2010-2016', self.get_url()+'search/title?' +'release_date=2010,2016&' + url_filter_less + url_type + 'sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_dec.png'))
-                    self.AddSection(list, indexer, '2000s', '2000-2009', self.get_url()+'search/title?' +'release_date=2000,2009&' + url_filter_less + url_type + 'sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_dec.png'))
-                    self.AddSection(list, indexer, '1990s', '1990-1999', self.get_url()+'search/title?' +'release_date=1990,1999&' + url_filter_less + url_type + 'sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_dec.png'))
-                    self.AddSection(list, indexer, '1980s', '1980-1989', self.get_url()+'search/title?' +'release_date=1980,1989&' + url_filter_less + url_type + 'sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_dec.png'))
-                    self.AddSection(list, indexer, '1970s', '1970-1979', self.get_url()+'search/title?' +'release_date=1970,1979&' + url_filter_less + url_type + 'sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_dec.png'))
-                    self.AddSection(list, indexer, '1960s', '1960-1969', self.get_url()+'search/title?' +'release_date=1960,1969&' + url_filter_less + url_type + 'sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_dec.png'))
-                    self.AddSection(list, indexer, '1950s', '1949-1959', self.get_url()+'search/title?' +'release_date=1949,1959&' + url_filter_less + url_type + 'sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_dec.png'))
+                    self.AddSection(list, indexer, '2010s', '2010-2016', self.get_url()+'search/title?' +'release_date=2010,2016&' + url_filter_less + url_type + 'sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_dec.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, '2000s', '2000-2009', self.get_url()+'search/title?' +'release_date=2000,2009&' + url_filter_less + url_type + 'sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_dec.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, '1990s', '1990-1999', self.get_url()+'search/title?' +'release_date=1990,1999&' + url_filter_less + url_type + 'sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_dec.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, '1980s', '1980-1989', self.get_url()+'search/title?' +'release_date=1980,1989&' + url_filter_less + url_type + 'sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_dec.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, '1970s', '1970-1979', self.get_url()+'search/title?' +'release_date=1970,1979&' + url_filter_less + url_type + 'sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_dec.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, '1960s', '1960-1969', self.get_url()+'search/title?' +'release_date=1960,1969&' + url_filter_less + url_type + 'sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_dec.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, '1950s', '1949-1959', self.get_url()+'search/title?' +'release_date=1949,1959&' + url_filter_less + url_type + 'sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_dec.png'), fanart=common.get_themed_fanart('imdb.jpg'))
 
         #added companies lists.
         #the sort order can be changed by all of the lists.
         elif section == 'company':
                 if indexer == common.indxr_Movies:
-                    self.AddSection(list, indexer, 'fox', '20th Century Fox', self.get_url()+'search/title?' + url_filter_small + 'companies=fox&' + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_comp.png'))
-                    self.AddSection(list, indexer, 'dreamworks', 'DreamWorks', self.get_url()+'search/title?' + url_filter_small + 'companies=dreamworks&' + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_comp.png'))
-                    self.AddSection(list, indexer, 'mgm', 'MGM', self.get_url()+'search/title?' + url_filter_small + 'companies=mgm&' + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_comp.png'))
-                    self.AddSection(list, indexer, 'paramount', 'Paramount', self.get_url()+'search/title?' + url_filter_small + 'companies=paramount&' + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_comp.png'))
-                    self.AddSection(list, indexer, 'columbia', 'Sony', self.get_url()+'search/title?' + url_filter_small + 'companies=columbia&' + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_comp.png'))
-                    self.AddSection(list, indexer, 'universal', 'Universal', self.get_url()+'search/title?' + url_filter_small + 'companies=universal&' + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_comp.png'))
-                    self.AddSection(list, indexer, 'disney', 'Walt Disney', self.get_url()+'search/title?' + url_filter_small + 'companies=disney&' + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_comp.png'))
-                    self.AddSection(list, indexer, 'warner', 'Warner Bros.', self.get_url()+'search/title?' + url_filter_small + 'companies=warner&' + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_comp.png'))
+                    self.AddSection(list, indexer, 'fox', '20th Century Fox', self.get_url()+'search/title?' + url_filter_small + 'companies=fox&' + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_comp.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, 'dreamworks', 'DreamWorks', self.get_url()+'search/title?' + url_filter_small + 'companies=dreamworks&' + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_comp.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, 'mgm', 'MGM', self.get_url()+'search/title?' + url_filter_small + 'companies=mgm&' + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_comp.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, 'paramount', 'Paramount', self.get_url()+'search/title?' + url_filter_small + 'companies=paramount&' + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_comp.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, 'columbia', 'Sony', self.get_url()+'search/title?' + url_filter_small + 'companies=columbia&' + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_comp.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, 'universal', 'Universal', self.get_url()+'search/title?' + url_filter_small + 'companies=universal&' + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_comp.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, 'disney', 'Walt Disney', self.get_url()+'search/title?' + url_filter_small + 'companies=disney&' + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_comp.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, 'warner', 'Warner Bros.', self.get_url()+'search/title?' + url_filter_small + 'companies=warner&' + url_type + 'sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_comp.png'), fanart=common.get_themed_fanart('imdb.jpg'))
 
         #added additional lists.
         #the sort order can be changed by most of the lists.
@@ -598,17 +599,17 @@ class IMDb(MovieIndexer, TVShowIndexer, CustomSettings, ListIndexer):
         elif section == 'award_lists':
                 if indexer == common.indxr_Movies:
                     #changed name to Best Picture-Winning, so I could add oscar winners list.
-                    self.AddSection(list, indexer, 'oscar_best_picture_winners', 'Best Picture-Winning', self.get_url()+'search/title?' + url_filter_small + url_type + 'groups=oscar_best_picture_winners&sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_awa.png'))
-                    self.AddSection(list, indexer, 'oscar_winners', 'Oscar-Winning', self.get_url()+'search/title?' + url_filter_small + url_type + 'groups=oscar_winners&sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_awa.png'))
-                    self.AddSection(list, indexer, 'oscar_nominees', 'Oscar-Nominated', self.get_url()+'search/title?' + url_filter_small + url_type + 'groups=oscar_nominees&sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_awa.png'))
-                    self.AddSection(list, indexer, 'golden_globe_winners', 'Golden Globe-Winning', self.get_url()+'search/title?' + url_filter_small + url_type + 'groups=golden_globe_winners&sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_awa.png'))
-                    self.AddSection(list, indexer, 'golden_g lobe_nominees', 'Golden Globe-Nominated', self.get_url()+'search/title?' + url_filter_small + url_type + 'groups=golden_globe_nominees&sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_awa.png'))
+                    self.AddSection(list, indexer, 'oscar_best_picture_winners', 'Best Picture-Winning', self.get_url()+'search/title?' + url_filter_small + url_type + 'groups=oscar_best_picture_winners&sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_awa.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, 'oscar_winners', 'Oscar-Winning', self.get_url()+'search/title?' + url_filter_small + url_type + 'groups=oscar_winners&sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_awa.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, 'oscar_nominees', 'Oscar-Nominated', self.get_url()+'search/title?' + url_filter_small + url_type + 'groups=oscar_nominees&sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_awa.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, 'golden_globe_winners', 'Golden Globe-Winning', self.get_url()+'search/title?' + url_filter_small + url_type + 'groups=golden_globe_winners&sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_awa.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, 'golden_g lobe_nominees', 'Golden Globe-Nominated', self.get_url()+'search/title?' + url_filter_small + url_type + 'groups=golden_globe_nominees&sort=boxoffice_gross_us,desc', indexer, img=common.get_themed_icon('imdb_awa.png'), fanart=common.get_themed_fanart('imdb.jpg'))
 
                 elif indexer == common.indxr_TV_Shows:
-                    self.AddSection(list, indexer, 'emmy_winners', 'Emmy Award-Winning', self.get_url()+'search/title?' + url_filter_small + url_type + 'groups=emmy_winners&sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_awa.png'))
-                    self.AddSection(list, indexer, 'emmy_nominees', 'Emmy Award-Nominated', self.get_url()+'search/title?' + url_filter_small + url_type + 'groups=emmy_nominees&sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_awa.png'))
-                    self.AddSection(list, indexer, 'golden_globe_winners', 'Golden Globe-Winning', self.get_url()+'search/title?' + url_filter_small + url_type + 'groups=golden_globe_winners&sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_awa.png'))
-                    self.AddSection(list, indexer, 'golden_globe_nominees', 'Golden Globe-Nominated', self.get_url()+'search/title?' + url_filter_small + url_type + 'groups=golden_globe_nominees&sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_awa.png'))
+                    self.AddSection(list, indexer, 'emmy_winners', 'Emmy Award-Winning', self.get_url()+'search/title?' + url_filter_small + url_type + 'groups=emmy_winners&sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_awa.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, 'emmy_nominees', 'Emmy Award-Nominated', self.get_url()+'search/title?' + url_filter_small + url_type + 'groups=emmy_nominees&sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_awa.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, 'golden_globe_winners', 'Golden Globe-Winning', self.get_url()+'search/title?' + url_filter_small + url_type + 'groups=golden_globe_winners&sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_awa.png'), fanart=common.get_themed_fanart('imdb.jpg'))
+                    self.AddSection(list, indexer, 'golden_globe_nominees', 'Golden Globe-Nominated', self.get_url()+'search/title?' + url_filter_small + url_type + 'groups=golden_globe_nominees&sort=num_votes,desc', indexer, img=common.get_themed_icon('imdb_awa.png'), fanart=common.get_themed_fanart('imdb.jpg'))
 
         else:
              self.ExtractContentAndAddtoList(indexer, section, url, type, list, page, total_pages, sort_by, sort_order)

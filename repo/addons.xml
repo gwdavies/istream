@@ -13,11 +13,12 @@
 	</extension>
 </addon>
 
-<addon id="script.icechannel" version="1.0.0.58" name="iSTREAM" provider-name="iSTREAM">
+<addon id="script.icechannel" version="1.0.0.59" name="iSTREAM" provider-name="iSTREAM">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
 		<import addon="script.module.urlresolver" version="0.0.1"/>
 		<import addon="script.module.universal" version="0.0.1" />
+		<import addon="script.module.beautifulsoup" version="0.0.1"/>
 		<import addon="script.module.metahandler" version="0.0.1"/>
 		<import addon="script.module.feedparser" version="0.0.1"/>
 		<import addon="script.module.pyamf" version="0.0.1"/>
@@ -50,7 +51,7 @@
     </extension>
 </addon>
 
-<addon id="script.icechannel.extn.common" version="0.3.4" name="iSTREAM - Common" provider-name="iSTREAM">
+<addon id="script.icechannel.extn.common" version="0.3.5" name="iSTREAM - Common" provider-name="iSTREAM">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
     </requires>
@@ -86,7 +87,7 @@
     </extension>
 </addon>
 
-<addon id="script.icechannel.theme.xunityhd" version="0.0.1" name="iStream Theme - Xunity HD" provider-name="iStream">
+<addon id="script.icechannel.theme.xunityhd" version="0.0.2" name="iStream Theme - Xunity HD" provider-name="iStream">
 <extension library="default.py" point="xbmc.service" />
 <extension point="xbmc.addon.metadata">
 <summary lang="en">iStream Theme - Xunity HD</summary>
@@ -101,7 +102,7 @@
 </extension>
 </addon>
 
-<addon id="script.istream.dialogs" version="0.2.0" name="iSTREAM Custom Windows and Dialogs" provider-name="iSTREAM">
+<addon id="script.istream.dialogs" version="0.2.1" name="iSTREAM Custom Windows and Dialogs" provider-name="iSTREAM">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
     </requires>

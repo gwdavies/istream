@@ -17,8 +17,8 @@ class Bookmarks(ListIndexer):
     def GetSection(self, indexer, section, url, type, list, page='', total_pages='', sort_by='', sort_order=''): 
         if section == 'main':
             
-            self.AddSection(list, indexer, 'Movies', 'Movies', type='movies')
-            self.AddSection(list, indexer, 'TV Episodes', 'TV Episodes', type='tv_episodes')
+            self.AddSection(list, indexer, 'Movies', 'Movies', type='movies', img=common.get_themed_icon('Bookmarks.png'), fanart=common.get_themed_fanart('Bookmarks.jpg'))
+            self.AddSection(list, indexer, 'TV Episodes', 'TV Episodes', type='tv_episodes', img=common.get_themed_icon('Bookmarks.png'), fanart=common.get_themed_fanart('Bookmarks.jpg'))
             
         else:
             from universal import playbackengine

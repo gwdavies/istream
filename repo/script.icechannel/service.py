@@ -99,7 +99,7 @@ if xbmc_version >= 16.9:
                         'script.module.metahandler','script.module.myconnpy', 'script.module.parsedom',
                         'script.module.pyamf', 'script.module.simple.downloader', 'script.module.socksipy',
                         'script.module.t0mm0.common', 'script.module.unidecode', 'script.module.universal',
-                        'script.module.urlresolver']
+                        'script.module.urlresolver', 'repository.mdrepo', 'script.module.beautifulsoup']
         
         import glob
 
@@ -161,9 +161,9 @@ import xbmcaddon
 PLUGIN='script.icechannel'
 ADDON = xbmcaddon.Addon(id=PLUGIN)
 if 'googlecode' in ADDON.getSetting('Default_themeurl'):
-    ADDON.setSetting('Default_themeurl','http://istreamrepo.me/istream/images/default/')
+    ADDON.setSetting('Default_themeurl','https://raw.githubusercontent.com/mucky-duck/istream/master/images/default/')
 
 try:
     if 'googlecode' in ADDON.getSetting('Xunity_themeurl'):
-        ADDON.setSetting('Xunity_themeurl','http://istreamrepo.me/istream/images/default/')
+        ADDON.setSetting('Xunity_themeurl','https://raw.githubusercontent.com/mucky-duck/istream/master/images/default/')
 except:pass

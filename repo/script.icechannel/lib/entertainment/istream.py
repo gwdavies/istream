@@ -472,7 +472,7 @@ def GetMainSection():
     
     unique_list.append( {'title':'myStream', 'mode':common.mode_MyStream, 'indexer':'mystream', 'section':'mystream',
                                             'img':common.get_themed_icon('mystream.png'),
-                                            'fanart':common.get_themed_icon('mystream.jpg')
+                                            'fanart':common.get_themed_fanart('mystream.jpg')
                                             } )    
     
     for indxr in Indexer.implementors(): 
@@ -486,35 +486,35 @@ def GetMainSection():
                                 'title':indxr.indexer_section_name, 
                                 'mode':common.mode_Indexer,
                                 'img':common.get_themed_icon(indxr.indexer_type+'.png'),
-                                'fanart':common.get_themed_icon(indxr.indexer_type+'.jpg')
+                                'fanart':common.get_themed_fanart(indxr.indexer_type+'.jpg')
                                 } )    
         #            break
     
     unique_list.append( {'title':'Playlists', 'mode':common.mode_File_Stores, 'indexer':'file_stores', 'section':'file_stores',
                                             'img':common.get_themed_icon('playlists.png'),
-                                            'fanart':common.get_themed_icon('playlists.jpg')
+                                            'fanart':common.get_themed_fanart('playlists.jpg')
                                             } )    
     unique_list.append( {'title':'Search', 'mode':common.mode_Search, 'indexer':'search', 'section':'search', 
                                             'img':common.get_themed_icon('search.png'),
-                                            'fanart':common.get_themed_icon('search.jpg')
+                                            'fanart':common.get_themed_fanart('search.jpg')
                                             } )    
     unique_list.append( {'title':'Settings', 'mode':common.mode_Settings, 'indexer':'settings', 'section':'settings',
                                             'img':common.get_themed_icon('settings.png'),
-                                            'fanart':common.get_themed_icon('settings.jpg')
+                                            'fanart':common.get_themed_fanart('settings.jpg')
                                             } )        
     unique_list.append( {'title':'Tools', 'mode':common.mode_Tools, 'indexer':'tools', 'section':'tools',
                                             'img':common.get_themed_icon('tools.png'),
-                                            'fanart':common.get_themed_icon('tools.jpg')  
+                                            'fanart':common.get_themed_fanart('tools.jpg')  
                                             } )        
                                             
     '''unique_list.append( {'title':'Extensions Installer', 'mode':common.mode_Installer, 'indexer':'installer', 'section':'installer',
                                             'img':common.get_themed_icon('installer.png'),
-                                            'fanart':common.get_themed_icon('installer.jpg')  
+                                            'fanart':common.get_themed_fanart('installer.jpg')  
                                             } ) '''       
                                             
     unique_list.append( {'title':'View End User Agreement', 'mode':common.mode_EULA, 'indexer':'eula', 'section':'eula',
                                             'img':common.get_themed_icon('eula.png'),
-                                            'fanart':common.get_themed_icon('eula.jpg')  
+                                            'fanart':common.get_themed_fanart('eula.jpg')  
                                             } )        
     return unique_list
     
@@ -527,7 +527,7 @@ def GetSearchItem(indexer):
             if indxr.search_supported:
                 unique_list.append( {'indexer':indxr.indexer_type, 'indexer_id':'search', 'section':'search', 'title':'Search', 'mode':common.mode_Search,
                                             'img':common.get_themed_icon('search_'+indxr.indexer_type+'.png'),
-                                            'fanart':common.get_themed_icon('search_'+indxr.indexer_type+'.jpg')  
+                                            'fanart':common.get_themed_fanart('search_'+indxr.indexer_type+'.jpg')  
                                             } )    
             break
             
@@ -541,7 +541,7 @@ def GetAllSearchItems():
             unique_list.append( {'indexer':indxr.indexer_type, 'indexer_id':'search', 'section':'search', 'title':'Search ' + indxr.indexer_section_name, 
                                             'mode':common.mode_Search,
                                             'img':common.get_themed_icon('search_'+indxr.indexer_type+'.png'),
-                                            'fanart':common.get_themed_icon('search_'+indxr.indexer_type+'.jpg')
+                                            'fanart':common.get_themed_fanart('search_'+indxr.indexer_type+'.jpg')
                                             } )    
             
     return unique_list
@@ -564,8 +564,8 @@ def GetIndexers(indexer):
                             'section':'main', 
                             'title':indxrtyp.display_name, 
                             'mode':common.mode_Sports if indexer == common.indxr_Sports else ( common.mode_Live_TV if indexer == common.indxr_Live_TV else common.mode_Section ),
-                            'img':indxrtyp.img if indxrtyp.img else common.get_themed_icon(indxrtyp.name + '.png'),
-                            'fanart':indxrtyp.fanart if indxrtyp.fanart else common.get_themed_icon(indxrtyp.name + '.jpg'),
+                            'img':common.get_themed_icon(indxrtyp.name + '.png') if common.get_themed_icon(indxrtyp.name + '.png') else indxrtyp.img,
+                            'fanart':common.get_themed_fanart(indxrtyp.name + '.jpg') if common.get_themed_fanart(indxrtyp.name + '.jpg') else indxrtyp.fanart,
                             'other_names':indxrtyp.other_names if indexer == common.indxr_Live_TV else '',
                             'region':indxrtyp.get_regions_csv() if indexer == common.indxr_Live_TV else '',
                             'language':indxrtyp.get_languages_csv() if indexer == common.indxr_Live_TV else '',
@@ -600,40 +600,40 @@ def GetSettingsSections(section = 'main'):
     if not section: section = 'main'
     
     if section == 'main':
-        unique_list.append( { 'id' : 'istream',         'name' : 'iStream', 'img':common.get_themed_icon('istream_settings.png'), 'fanart':common.get_themed_icon('istream_settings.jpg') } )
-        unique_list.append( { 'id' : 'movies',          'name' : 'Movies', 'img':common.get_themed_icon('movies_settings.png'), 'fanart':common.get_themed_icon('movies_settings.jpg') } )
-        unique_list.append( { 'id' : 'tvshows',         'name' : 'TV Shows', 'img':common.get_themed_icon('tv_shows_settings.png'), 'fanart':common.get_themed_icon('tv_shows_settings.jpg') } )
-        #unique_list.append( { 'id' : 'livetv',          'name' : 'Live TV', 'img':common.get_themed_icon('live_tv_settings.png'), 'fanart':common.get_themed_icon('live_tv_settings.jpg') } )
-        #unique_list.append( { 'id' : 'livesports',      'name' : 'Sports (Live)', 'img':common.get_themed_icon('live_sports_settings.png'), 'fanart':common.get_themed_icon('live_sports_settings.jpg') } )
-        unique_list.append( { 'id' : 'resolvers',       'name' : 'Resolvers', 'img':common.get_themed_icon('resolvers_settings.png'), 'fanart':common.get_themed_icon('resolvers_settings.jpg') } )
-        unique_list.append( { 'id' : 'prm_resolvers',   'name' : 'Premium Resolvers', 'img':common.get_themed_icon('prm_resolvers_settings.png'), 'fanart':common.get_themed_icon('prm_resolvers_settings.jpg') } )
-        unique_list.append( { 'id' : 'external',        'name' : 'External', 'img':common.get_themed_icon('external_settings.png'), 'fanart':common.get_themed_icon('external_settings.jpg') } )
+        unique_list.append( { 'id' : 'istream',         'name' : 'iStream', 'img':common.get_themed_icon('settings_istream.png'), 'fanart':common.get_themed_fanart('settings_istream.jpg') } )
+        unique_list.append( { 'id' : 'movies',          'name' : 'Movies', 'img':common.get_themed_icon('settings_movies.png'), 'fanart':common.get_themed_fanart('settings_movies.jpg') } )
+        unique_list.append( { 'id' : 'tvshows',         'name' : 'TV Shows', 'img':common.get_themed_icon('settings_tv_shows.png'), 'fanart':common.get_themed_fanart('settings_tv_shows.jpg') } )
+        #unique_list.append( { 'id' : 'livetv',          'name' : 'Live TV', 'img':common.get_themed_icon('live_tv_settings.png'), 'fanart':common.get_themed_fanart('live_tv_settings.jpg') } )
+        #unique_list.append( { 'id' : 'livesports',      'name' : 'Sports (Live)', 'img':common.get_themed_icon('live_sports_settings.png'), 'fanart':common.get_themed_fanart('live_sports_settings.jpg') } )
+        unique_list.append( { 'id' : 'resolvers',       'name' : 'Resolvers', 'img':common.get_themed_icon('settings_resolvers.png'), 'fanart':common.get_themed_fanart('settings_resolvers.jpg') } )
+        unique_list.append( { 'id' : 'prm_resolvers',   'name' : 'Premium Resolvers', 'img':common.get_themed_icon('resolvers_settings_prm.png'), 'fanart':common.get_themed_fanart('resolvers_settings_prm.jpg') } )
+        unique_list.append( { 'id' : 'external',        'name' : 'External', 'img':common.get_themed_icon('settings_external.png'), 'fanart':common.get_themed_fanart('settings_external.jpg') } )
     
     elif section == 'istream':
         loadiStreamPlugins(load_settingsxml=False, load_settings=True)
-        unique_list.append( {'name':'General', 'id':'script.icechannel', 'img':common.get_themed_icon('istream_general_settings.png'), 'fanart':common.get_themed_icon('istream_general_settings.jpg') } )
+        unique_list.append( {'name':'General', 'id':'script.icechannel', 'img':common.get_themed_icon('settings_istream.png'), 'fanart':common.get_themed_fanart('settings_istream.jpg') } )
         for cs in iStreamSettings.implementors(): 
-            unique_list.append( {'name':cs.name, 'type':cs.type, 'id':cs.settings_id, 'img':common.get_themed_icon(cs.type + '_settings.png'), 'fanart':common.get_themed_icon(cs.type + '_settings.jpg') } )
+            unique_list.append( {'name':cs.name, 'type':cs.type, 'id':cs.settings_id, 'img':common.get_themed_icon('settings_istream.png'), 'fanart':common.get_themed_fanart('settings_istream.jpg') } )
             
     elif section == 'movies':
-        unique_list.append( {'name':'General', 'type':common.settings_Movies, 'id':'script.icechannel.iStream.movies.settings', 'img':common.get_themed_icon('movies_general_settings.png'), 'fanart':common.get_themed_icon('movies_general_settings.jpg') } )
+        unique_list.append( {'name':'General', 'type':common.settings_Movies, 'id':'script.icechannel.iStream.movies.settings', 'img':common.get_themed_icon('settings_movies.png'), 'fanart':common.get_themed_fanart('settings_movies.jpg') } )
         from plugnplay.interfaces import MovieIndexer, MovieSource
         common.loadplugins([MovieIndexer,MovieSource])
         csi = CustomSettings.implementors()
         csi.sort(key=lambda k: common.custom_item_sort(k.name))
         for cs in csi:
             if isinstance(cs, MovieIndexer) or isinstance(cs, MovieSource):
-                unique_list.append( {'name':cs.settings_name, 'id':cs.settings_id, 'img':cs.settings_img, 'fanart':cs.settings_fanart} )
+                unique_list.append( {'name':cs.settings_name, 'id':cs.settings_id, 'img':common.get_themed_icon('settings_movies.png'), 'fanart':common.get_themed_fanart('settings_movies.jpg')} )
         
     elif section == 'tvshows':
-        unique_list.append( {'name':'General', 'type':common.settings_TV_Shows, 'id':'script.icechannel.iStream.tv_shows.settings', 'img':common.get_themed_icon('tv_shows_general_settings.png'), 'fanart':common.get_themed_icon('tv_shows_general_settings.jpg') } )
+        unique_list.append( {'name':'General', 'type':common.settings_TV_Shows, 'id':'script.icechannel.iStream.tv_shows.settings', 'img':common.get_themed_icon('settings_tv_shows.png'), 'fanart':common.get_themed_fanart('settings_tv_shows.jpg') } )
         from plugnplay.interfaces import TVShowIndexer, TVShowSource
         common.loadplugins([TVShowIndexer,TVShowSource])
         csi = CustomSettings.implementors()
         csi.sort(key=lambda k: common.custom_item_sort(k.name))
         for cs in csi:
             if isinstance(cs, TVShowIndexer) or isinstance(cs, TVShowSource):
-                unique_list.append( {'name':cs.settings_name, 'id':cs.settings_id, 'img':cs.settings_img, 'fanart':cs.settings_fanart} )
+                unique_list.append( {'name':cs.settings_name, 'id':cs.settings_id, 'img':common.get_themed_icon('settings_tv_shows.png'), 'fanart':common.get_themed_fanart('settings_tv_shows.jpg')} )
         
     elif section == 'livetv':
         unique_list.append( {'name':'General', 'type':common.settings_Live_TV, 'id':'script.icechannel.iStream.live_tv.settings', 'img':common.get_themed_icon('live_tv_general_settings.png'), 'fanart':common.get_themed_icon('live_tv_general_settings.jpg') } )
@@ -656,14 +656,14 @@ def GetSettingsSections(section = 'main'):
                 unique_list.append( {'name':cs.settings_name, 'id':cs.settings_id, 'img':cs.settings_img, 'fanart':cs.settings_fanart} )
                 
     elif section == 'resolvers':
-        unique_list.append( {'name':'URL Resolver', 'id':'script.module.urlresolver'} )
+        unique_list.append( {'name':'URL Resolver', 'id':'script.module.urlresolver', 'img':common.get_themed_icon('settings_resolvers.png'), 'fanart':common.get_themed_fanart('settings_resolvers.jpg')} )
         from plugnplay.interfaces import HostResolver, LiveResolver
         common.loadplugins([HostResolver,LiveResolver])
         csi = CustomSettings.implementors()
         csi.sort(key=lambda k: common.custom_item_sort(k.name))
         for cs in csi:
             if isinstance(cs, HostResolver) or isinstance(cs, LiveResolver):
-                unique_list.append( {'name':cs.settings_name, 'id':cs.settings_id, 'img':cs.settings_img, 'fanart':cs.settings_fanart} )
+                unique_list.append( {'name':cs.settings_name, 'id':cs.settings_id, 'img':common.get_themed_icon('settings_resolvers.png'), 'fanart':common.get_themed_fanart('settings_resolvers.jpg')} )
                 
     elif section == 'prm_resolvers':
         from plugnplay.interfaces import PremiumHostResolver
@@ -672,13 +672,13 @@ def GetSettingsSections(section = 'main'):
         csi.sort(key=lambda k: common.custom_item_sort(k.name))
         for cs in csi:
             if isinstance(cs, PremiumHostResolver):
-                unique_list.append( {'name':cs.settings_name, 'id':cs.settings_id, 'img':cs.settings_img, 'fanart':cs.settings_fanart} )
+                unique_list.append( {'name':cs.settings_name, 'id':cs.settings_id, 'img':common.get_themed_icon('resolvers_settings_prm.png'), 'fanart':common.get_themed_fanart('resolvers_settings_prm.jpg')} )
         
                 
     elif section == 'external':
-        unique_list.append( {'name':'Metahandler', 'id':'script.module.metahandler'} )
-        unique_list.append( {'name':'Universal Toolkit', 'id':'script.module.universal'} )
-        unique_list.append( {'name':'URL Resolver', 'id':'script.module.urlresolver'} )
+        unique_list.append( {'name':'Metahandler', 'id':'script.module.metahandler', 'img':common.get_themed_icon('settings_external.png'), 'fanart':common.get_themed_fanart('settings_external.jpg')} )
+        unique_list.append( {'name':'Universal Toolkit', 'id':'script.module.universal', 'img':common.get_themed_icon('settings_external.png'), 'fanart':common.get_themed_fanart('settings_external.jpg')} )
+        unique_list.append( {'name':'URL Resolver', 'id':'script.module.urlresolver', 'img':common.get_themed_icon('settings_external.png'), 'fanart':common.get_themed_fanart('settings_external.jpg')} )
         
     if section not in ('main', 'istream', 'external',):
         import xbmc
@@ -697,10 +697,10 @@ def GetiStreamSettings(type=None, id=None):
     else:
         unique_list = []  
 
-        unique_list.append( {'settings_name':'General', 'settings_id':'script.icechannel', 'img':common.get_themed_icon('istream_general_settings.png'), 'fanart':common.get_themed_icon('istream_general_settings.jpg') } )
+        unique_list.append( {'settings_name':'General', 'settings_id':'script.icechannel', 'img':common.get_themed_icon('istream_settings.png'), 'fanart':common.get_themed_fanart('istream_settings.jpg') } )
         
         for cs in iStreamSettings.implementors(): 
-            unique_list.append( {'settings_name':cs.name, 'settings_id':cs.settings_id, 'img':common.get_themed_icon(cs.type + '_settings.png'), 'fanart':common.get_themed_icon(cs.type + '_settings.jpg') } )
+            unique_list.append( {'settings_name':cs.name, 'settings_id':cs.settings_id, 'img':common.get_themed_icon('istream_settings.png'), 'fanart':common.get_themed_fanart('istream_settings.jpg') } )
             
         return unique_list
         
@@ -1116,8 +1116,8 @@ def GetTools():
     unique_list = []
     
     for tool in Tools.implementors(): 
-        tool_img = tool.img if tool.img else common.get_themed_icon(tool.name + '.png')
-        tool_fanart = tool.fanart if tool.fanart else common.get_themed_icon(tool.name + '.jpg')
+        tool_img = common.get_themed_icon('tools.png') if common.get_themed_icon('tools.png') else tool.img
+        tool_fanart = common.get_themed_fanart('tools.jpg') if common.get_themed_fanart('tools.jpg') else tool.fanart 
         unique_list.append({'title':tool.display_name, 'mode':common.mode_Tools, 'indexer':'tools', 'section':'tools', 'name':tool.name,
             'img':tool_img, 'fanart':tool_fanart, 'notify_msg_header':tool.notify_msg_header, 'notify_msg_success':tool.notify_msg_success,
             'notify_msg_failure':tool.notify_msg_failure } )

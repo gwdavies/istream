@@ -270,10 +270,12 @@ class Parent(Plugin, Interface):
     def AddDummy(self, list, title):
         list.append( {'mode':common.mode_Dummy, 'title':title} )
     
-    def AddContent(self, list, indexer, mode, title, id, type, url='', name='', year='', season='', episode='', img='', genre='', plot='', imdb_id=''):    
+    def AddContent(self, list, indexer, mode, title, id, type, url='', name='', year='', season='', episode='', img='', fanart='', genre='', plot='', imdb_id=''):    
         if id == '':
             id = common.CreateIdFromString(title)
-        list.append( {'indexer':indexer, 'mode':mode, 'title':title, 'url':url, 'website':self.name, 'name':name, 'year':year, 'season':season, 'episode':episode, 'type':type, 'id':id, 'img':img, 'genre':genre, 'plot':plot, 'imdb_id':imdb_id  } ) 
+        list.append( {'indexer':indexer, 'mode':mode, 'title':title, 'url':url, 'website':self.name, 'name':name,
+                      'year':year, 'season':season, 'episode':episode, 'type':type, 'id':id, 'img':img, 'fanart':fanart,
+                      'genre':genre, 'plot':plot, 'imdb_id':imdb_id  } ) 
     
     def Search(self, srcr, keywords, type, list, lock, message_queue, page='', total_pages=''): 
         not_implemented(self)
@@ -1028,10 +1030,13 @@ class Indexer(Parent):
             self.fanart = common.get_themed_icon(self.name + '_art.png')
     
     def AddInfo(self, list, indexer, section, url, type, page='', total_pages='', sort_by='', sort_order=''):
-        list.append( {'indexer':indexer, 'section':section, 'website':self.name, 'id':self.name+'_info', 'title':self.name+' Info','mode':common.mode_Info, 'url':url, 'type':type, 'page':page, 'total_pages':total_pages, 'sort_by':sort_by, 'sort_order':sort_order } )
+        list.append( {'indexer':indexer, 'section':section, 'website':self.name, 'id':self.name+'_info',
+                      'title':self.name+' Info','mode':common.mode_Info, 'url':url, 'type':type, 'page':page,
+                      'total_pages':total_pages, 'sort_by':sort_by, 'sort_order':sort_order } )
     
-    def AddSection(self, list, indexer, section, title, url='', type='', hlevel=0, img='', plot=''):
-        list.append( {'indexer':indexer, 'section':section, 'website':self.name, 'mode':common.mode_Section, 'title':title, 'url':url, 'type':type, 'hlevel':str(hlevel), 'img':img, 'plot':plot} )
+    def AddSection(self, list, indexer, section, title, url='', type='', hlevel=0, img='', fanart='', plot=''):
+        list.append( {'indexer':indexer, 'section':section, 'website':self.name, 'mode':common.mode_Section,
+                      'title':title, 'url':url, 'type':type, 'hlevel':str(hlevel), 'img':img, 'fanart':fanart, 'plot':plot} )
         
     def GetSection(self, indexer, section, url, type, list, page='', total_pages='', sort_by='', sort_order=''): 
         '''Use lock for operations other than append on the list'''

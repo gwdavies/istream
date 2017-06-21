@@ -23,7 +23,7 @@ class Favorites(ListIndexer):
             main_sections = fav.get_my_main_sections()
             
             for main_section in main_sections:
-                self.AddSection(list, indexer, main_section['title'], main_section['title'], type=main_section['title'].lower())
+                self.AddSection(list, indexer, main_section['title'], main_section['title'], type=main_section['title'].lower(), img=common.get_themed_icon('Favorites.png'), fanart=common.get_themed_fanart('Favorites.jpg'))
                 
         else:
             section_items = section.split('|')

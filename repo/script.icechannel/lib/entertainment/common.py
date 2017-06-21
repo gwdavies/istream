@@ -24,10 +24,12 @@ profile_path = addon.get_profile()
 theme_name = addon.get_setting('theme')
 theme_type = addon.get_setting(theme_name+'_themetype')
 if theme_type == 'online':
-    icon_path = addon.get_setting(theme_name+'_themeurl')
+    icon_path = addon.get_setting(theme_name+'_themeurl'+'icons')
+    fanart_path = addon.get_setting(theme_name+'_themeurl'+'fanart')
 else:
     theme_addon = Addon( addon.get_setting(theme_name+'_themeaddon') )
-    icon_path = os.path.join(theme_addon.get_path(), 'theme')
+    icon_path = os.path.join(theme_addon.get_path(), 'theme', 'icons')
+    fanart_path = os.path.join(theme_addon.get_path(), 'theme', 'fanart')
 
 def get_themed_icon(icon_file_name):
     if icon_path.startswith('http'):
@@ -36,7 +38,18 @@ def get_themed_icon(icon_file_name):
         icon = os.path.join(icon_path, icon_file_name)
         #if not os.path.exists( icon ):
         #    icon = 'https://istream-xbmc-repo.googlecode.com/svn/images/' + icon_file_name
+    if not os.path.exists(icon):
+        icon = os.path.join(icon_path, 'icon.png')
     return icon
+
+def get_themed_fanart(fanart_file_name):
+    if fanart_path.startswith('http'):
+        fanart = fanart_path + fanart_file_name
+    else:
+        fanart = os.path.join(fanart_path, fanart_file_name)
+    if not os.path.exists(fanart):
+        fanart = os.path.join(fanart_path, 'fanart.jpg')
+    return fanart
     
 icon = get_themed_icon('icon.png')    
 notify_icon = get_themed_icon('notifyicon.png')
@@ -833,7 +846,7 @@ def _update_settings_xml():
 
             
             f.write('<setting id="Default_themetype" type="text" label="Theme Type" default="online" visible="false"/>\n')
-            f.write('<setting id="Default_themeurl" type="text" label="Theme URL" default="http://istreamrepo.me/istream/images/default/" visible="false"/>\n')
+            f.write('<setting id="Default_themeurl" type="text" label="Theme URL" default="https://raw.githubusercontent.com/mucky-duck/istream/master/images/default/" visible="false"/>\n')
             f.write('<setting id="Default_themeaddon" type="text" label="Theme Addon" default="" visible="false"/>\n')            
             
             themes = 'Default'
