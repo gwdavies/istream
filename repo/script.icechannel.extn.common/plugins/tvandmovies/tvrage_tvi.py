@@ -20,7 +20,7 @@ class tvrage(TVShowIndexer):
 
     import xbmcaddon
     import os
-    addon_id = 'script.icechannel.extn.xunitytalk'
+    addon_id = 'script.icechannel.extn.common'
     addon = xbmcaddon.Addon(addon_id)
     #img = os.path.join( addon.getAddonInfo('path'), 'resources', 'images', 'tvrage.png' )
     	
