@@ -40,15 +40,20 @@ class md:
 	def __init__(self, addon_id, argv=None):
 		
 
-		self.addon = Addon(addon_id, sys.argv)
+		if argv is not None:
+			self.addon = Addon(addon_id, sys.argv)
+		else:
+			self.addon = Addon(addon_id)
 		self.addon_name = '[COLOR white][B]%s[/B][/COLOR]' %self.addon.get_name()
 		self.addon_id = self.addon.get_id()
 		self.icon = self.addon.get_icon()
 		
-		if argv[0]:
-			self.url = sys.argv[0]
-			self.handle = int(sys.argv[1])
-			self.args = self.parse_query(sys.argv[2][1:])
+		try:
+			if argv[0]:
+				self.url = sys.argv[0]
+				self.handle = int(sys.argv[1])
+				self.args = self.parse_query(sys.argv[2][1:])
+		except:pass
 
 
 

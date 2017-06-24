@@ -1,5 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
+<addon id="plugin.video.EasyNews" name="EasyNews" version="5.0.0" provider-name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.addon.common" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Easynews</summary>
+    <description lang="en">Stream From EasyNews....Ported from original addon</description>
+	<disclaimer lang="en">The author does not host or distribute any of the content displayed by this addon or have any affiliation with the website owners</disclaimer>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.watchwrestling" name="Watch Wrestling" version="0.2.4" provider-name="[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.t0mm0.common" version="0.0.1"/>
+	<import addon="script.module.urlresolver" version="0.0.1"/>
+	<import addon="script.module.universal" version="0.0.1" />
+  </requires>
+  <extension point="xbmc.python.pluginsource"
+            library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Watch Wrestling (http://watchwrestling.ch/)</summary>
+    <description lang="en">Free WWE, TNA, ROH, UFC Online...[CR][CR][COLOR orange]Support[/COLOR] @ [COLOR blue]www.[B]XUNITYTALK[/B].com[/COLOR]</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.wweonline" name="WWE Online" version="0.2.0" provider-name="[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.urlresolver" version="0.0.1"/>
+	<import addon="script.module.t0mm0.common" version="0.0.1"/>
+	<import addon="script.module.universal" version="0.0.1" />
+  </requires>
+  <extension point="xbmc.python.pluginsource"
+            library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">WWE Online (wweo.net)</summary>
+    <description lang="en">WWE Online (wweo.net) - The biggest WWE and Wrestling TV Show and videos Database. Watch WWE, TNA, UFC, FCW, ROH for free.</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
 <addon id="repository.istream" name="iSTREAM XBMC Addons Repository" version="10.4" provider-name="iSTREAM">
 	<extension point="xbmc.addon.repository" name="iSTREAM">
 		<info compressed="false">https://raw.githubusercontent.com/mucky-duck/istream/master/repo/addons.xml</info>
@@ -13,7 +65,7 @@
 	</extension>
 </addon>
 
-<addon id="script.icechannel" version="1.0.0.60" name="iSTREAM" provider-name="iSTREAM">
+<addon id="script.icechannel" version="1.0.0.61" name="iSTREAM" provider-name="iSTREAM">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
 		<import addon="script.module.urlresolver" version="0.0.1"/>
@@ -51,7 +103,7 @@
     </extension>
 </addon>
 
-<addon id="script.icechannel.extn.common" version="0.3.6" name="iSTREAM - Common" provider-name="iSTREAM">
+<addon id="script.icechannel.extn.common" version="0.3.7" name="iSTREAM - Common" provider-name="iSTREAM">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
     </requires>
@@ -87,7 +139,7 @@
     </extension>
 </addon>
 
-<addon id="script.icechannel.theme.xunityhd" version="0.0.2" name="iStream Theme - Xunity HD" provider-name="iStream">
+<addon id="script.icechannel.theme.xunityhd" version="0.0.3" name="iStream Theme - Xunity HD" provider-name="iStream">
 <extension library="default.py" point="xbmc.service" />
 <extension point="xbmc.addon.metadata">
 <summary lang="en">iStream Theme - Xunity HD</summary>
@@ -167,7 +219,7 @@
   </extension>
 </addon>
 
-<addon id="script.module.muckys.common" name="Muckys Common Libraries" version="1.3.4" provider-name="Mucky Duck">
+<addon id="script.module.muckys.common" name="Muckys Common Libraries" version="1.3.5" provider-name="Mucky Duck">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
 	</requires>

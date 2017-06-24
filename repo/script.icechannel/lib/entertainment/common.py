@@ -4,8 +4,11 @@
 import os    
 import sys
 from addon import Addon
+from md_tools import md
 
 addon_id = 'script.icechannel'
+
+md = md(addon_id)
 
 try:
     addon = Addon(addon_id, sys.argv)
@@ -389,7 +392,7 @@ def ConvertStringToList(in_string):
     in_string = in_string[1:len(in_string)-1]
 
     return decode_list ( in_string.split(',') )
-    
+
 ########## END
 ##### ENCODE / DECODE LIST
 

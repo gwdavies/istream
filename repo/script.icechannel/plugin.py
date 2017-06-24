@@ -347,7 +347,7 @@ def get_metadata(metaget, video_type, vidtitle, vidname='', year='', imdb=None, 
     try:
         if video_type in (common.VideoType_TV, common.VideoType_Season, common.VideoType_Episode ) :
             tv_title = common.CleanTextForSearch(vidname, strip=True) 
-            meta = metaget.get_meta(common.VideoType_TV, tv_title, imdb_id=imdb)
+            meta = metaget.get_meta(common.VideoType_TV, tv_title, year=year, imdb_id=imdb)
             if not (meta['imdb_id'] or meta['tvdb_id']):
                 meta = metaget.get_meta(video_type, tv_title, imdb_id=imdb, year=year)
             imdb = meta.get('imdb_id', '')
@@ -3114,7 +3114,7 @@ else:
         
                 if video_type == common.VideoType_TV:
                     tv_title = common.CleanTextForSearch(curr_name, strip=True)
-                    meta = metaget.get_meta(video_type, tv_title, imdb_id=sub_data['imdb_id'])
+                    meta = metaget.get_meta(video_type, tv_title, year=curr_year, imdb_id=sub_data['imdb_id'])
                     if not (meta['imdb_id'] or meta['tvdb_id']):
                         meta = metaget.get_meta(video_type, tv_title, imdb_id=sub_data['imdb_id'], year=curr_year)
                         
@@ -3194,7 +3194,7 @@ else:
                     if metaget:    
                         if video_type == common.VideoType_TV:
                             tv_title = common.CleanTextForSearch(curr_name, strip=True)
-                            meta = metaget.get_meta(video_type, tv_title, imdb_id=curr_imdb_id)
+                            meta = metaget.get_meta(video_type, tv_title, year=curr_year, imdb_id=curr_imdb_id)
                             if not (meta['imdb_id'] or meta['tvdb_id']):
                                 meta = metaget.get_meta(video_type, tv_title, imdb_id=curr_imdb_id, year=curr_year)
                                 
