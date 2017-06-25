@@ -291,15 +291,15 @@ class FurkDotNet(MovieSource, TVShowSource, CustomSettings):
                                     res = 'LOW'
                                     
                                  
-                                file_format = 'NA'
-                                for key, value in common.movie_container_dict.iteritems():
-                                    if re.search('[^a-zA-Z0-9]' + key + '[^a-zA-Z0-9]', file_name_lower) or file_name_lower.endswith(key):
-                                        file_format = value
-                                        break
-                                    
-                                file_name = (file_size_fmt % (file_format, file_size)) + " " + file_name
-                    
-                                self.GetFileHosts(file_id, list, lock, message_queue, res, file_name)
+                            file_format = 'NA'
+                            for key, value in common.movie_container_dict.iteritems():
+                                if re.search('[^a-zA-Z0-9]' + key + '[^a-zA-Z0-9]', file_name_lower) or file_name_lower.endswith(key):
+                                    file_format = value
+                                    break
+                                
+                            file_name = (file_size_fmt % (file_format, file_size)) + " " + file_name
+                
+                            self.GetFileHosts(file_id, list, lock, message_queue, res, file_name)
             except:pass
                                 
     def ReturnRes(self, file_name_lower):

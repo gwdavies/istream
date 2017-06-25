@@ -40,7 +40,7 @@ THEHOST=THEHOST.split('/')[0]
 
 #PATHS
 AddonPath = addon.get_path()
-IconPath = os.path.join(AddonPath, 'icons')
+IconPath = os.path.join(AddonPath, 'art')
 
 from universal import _common as univ_common
 from universal import watchhistory, playbackengine
