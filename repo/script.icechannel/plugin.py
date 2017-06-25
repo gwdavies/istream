@@ -332,24 +332,30 @@ def add_contextmenu(video_type, indexer, indexer_id, mode, section, url, imdb_id
 
     return contextMenuItems
 
-def get_metadata(metaget, video_type, vidtitle, vidname='', year='', imdb=None, season_list=None, season_num=0, episode_num=0, img=''):    
+def get_metadata(metaget, video_type, vidtitle, vidname='', year='', imdb='',
+                 season_list=None, season_num=0, episode_num=0, img=''):    
     
     try:
         year = int(year)
     except:
         year = 0
     year = str(year)
-    
-    meta = {'title': title, 'year': year, 'imdb_id': '', 'overlay': ''}
+
+    meta = {'title': vidtitle, 'year': year, 'imdb_id': '', 'overlay': ''}
     
     returnlist = True
-    
+
     try:
         if video_type in (common.VideoType_TV, common.VideoType_Season, common.VideoType_Episode ) :
             tv_title = common.CleanTextForSearch(vidname, strip=True) 
             meta = metaget.get_meta(common.VideoType_TV, tv_title, year=year, imdb_id=imdb)
             if not (meta['imdb_id'] or meta['tvdb_id']):
-                meta = metaget.get_meta(video_type, tv_title, imdb_id=imdb, year=year)
+                meta = metaget.get_meta(common.VideoType_TV, tv_title, imdb_id=imdb, update=True)
+
+            '''meta = metaget.get_meta(common.VideoType_TV, tv_title, imdb_id=imdb)
+            if not (meta['imdb_id'] or meta['tvdb_id']):
+                meta = metaget.get_meta(video_type, tv_title, imdb_id=imdb, year=year)'''
+
             imdb = meta.get('imdb_id', '')
         elif video_type == common.VideoType_Movies:
             meta = metaget.get_meta(video_type, common.CleanTextForSearch(vidtitle, strip=True), imdb_id=imdb, year=year)
@@ -3116,7 +3122,10 @@ else:
                     tv_title = common.CleanTextForSearch(curr_name, strip=True)
                     meta = metaget.get_meta(video_type, tv_title, year=curr_year, imdb_id=sub_data['imdb_id'])
                     if not (meta['imdb_id'] or meta['tvdb_id']):
-                        meta = metaget.get_meta(video_type, tv_title, imdb_id=sub_data['imdb_id'], year=curr_year)
+                        meta = metaget.get_meta(video_type, tv_title, imdb_id=sub_data['imdb_id'], update=True)
+                    '''meta = metaget.get_meta(video_type, tv_title, imdb_id=sub_data['imdb_id'])
+                    if not (meta['imdb_id'] or meta['tvdb_id']):
+                        meta = metaget.get_meta(video_type, tv_title, imdb_id=sub_data['imdb_id'], year=curr_year)'''
                         
                 if meta['status'] == 'Ended':
                     if not subs.cancel_subscription(indexer, type, video_type, curr_name, curr_year):
@@ -3196,7 +3205,10 @@ else:
                             tv_title = common.CleanTextForSearch(curr_name, strip=True)
                             meta = metaget.get_meta(video_type, tv_title, year=curr_year, imdb_id=curr_imdb_id)
                             if not (meta['imdb_id'] or meta['tvdb_id']):
-                                meta = metaget.get_meta(video_type, tv_title, imdb_id=curr_imdb_id, year=curr_year)
+                                meta = metaget.get_meta(video_type, tv_title, imdb_id=curr_imdb_id, update=True)
+                            '''meta = metaget.get_meta(video_type, tv_title, imdb_id=curr_imdb_id)
+                            if not (meta['imdb_id'] or meta['tvdb_id']):
+                                meta = metaget.get_meta(video_type, tv_title, imdb_id=curr_imdb_id, year=curr_year)'''
                                 
                         if meta['status'] == 'Ended':
                             if not subs.cancel_subscription(indexer, type, video_type, curr_name, curr_year):

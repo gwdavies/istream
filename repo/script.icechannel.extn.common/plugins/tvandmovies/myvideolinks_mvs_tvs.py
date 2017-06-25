@@ -23,7 +23,7 @@ class myvideolinks(MovieSource, TVShowSource):
     name = "myvideolinks"
     source_enabled_by_default = 'false'
     display_name = "Myvideolinks"
-    base_url = 'http://newmyvideolink.xyz/'
+    base_url = 'https://myvideolinks.tk/'
     User_Agent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'
     
     
@@ -31,7 +31,7 @@ class myvideolinks(MovieSource, TVShowSource):
 
 
         from entertainment.net import Net
-        import re
+        import urlresolver,re
         net = Net(cached=False)
 
         
@@ -61,8 +61,8 @@ class myvideolinks(MovieSource, TVShowSource):
                 res='HD'
             else:
                 res='720P'
-                
-            self.AddFileHost(list, res, url, host=host)
+            if urlresolver.HostedMediaFile(url):
+                self.AddFileHost(list, res, url, host=host)
 
 
 
@@ -79,7 +79,7 @@ class myvideolinks(MovieSource, TVShowSource):
         name = self.CleanTextForSearch(name.lower())
 
         base_link = net.http_GET(self.base_url,headers=headers).content
-        baseurl = re.compile('href="(.+?newmyvideolink.+?)"').findall(base_link)[0]
+        baseurl = 'https://myvideolinks.tk/'
 
         season_pull = "0%s"%season if len(season)<2 else season
         episode_pull = "0%s"%episode if len(episode)<2 else episode

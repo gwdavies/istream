@@ -251,7 +251,7 @@ class movie25(MovieIndexer, MovieSource, TVShowIndexer, TVShowSource):
             url = url[1:]
             url = self.base_url + url
 
-        content = open_url(url,headers=headers).content
+        content = open_url(url,headers=headers,timeout=3).content
         content = content.replace('\r','').replace('\n','').replace('\t','').replace('\b','')
 
         
@@ -352,7 +352,7 @@ class movie25(MovieIndexer, MovieSource, TVShowIndexer, TVShowSource):
         request_url = '%s/getlink.php' %self.base_url
         link_id = url.split('=')
         form_data = {'Action':'get',link_id[0].replace('?',''):link_id[1]}
-        play_url = open_url(request_url,method='post',data=form_data,headers=headers).text
+        play_url = open_url(request_url,method='post',data=form_data,headers=headers,timeout=3).text
         if play_url[1] == '/':
             play_url = 'http:' + play_url
         if play_url[0] == '/':

@@ -11,7 +11,7 @@ class mydownloadtubeonline(MovieSource):
     
     name = "mydownloadtubeonline"
     display_name = "MyDownloadTubeOnline"
-    base_url = 'http://www.mydownloadtube.com/'
+    base_url = 'https://www.mydownloadtube.com/'
     
     source_enabled_by_default = 'true'
 

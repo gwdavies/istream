@@ -44,9 +44,10 @@ class Tvrelease(MovieSource,TVShowSource):
                 res = 'DVD'  
             else:
                 res='SD'
-            if not '.rar' in url or not 'go4up' in url:
-               
-                self.AddFileHost(list,res,url)
+            if not '.rar' in url:
+                if not 'go4up.com' in url:
+                    if not 'multiup' in url:             
+                        self.AddFileHost(list,res,url)
 
 
     def GetFileHostsForContent(self, title, name, year, season, episode, type, list, lock, message_queue):

@@ -41,8 +41,8 @@ class IceFilms(MovieIndexer, MovieSource, TVShowIndexer, TVShowSource, CustomSet
         custom_url = self.Settings().get_setting('custom_urls')
         if custom_url == 'Custom':
             custom_url = self.Settings().get_setting('custom_text_url')
-        if not custom_url.startswith('http://'):
-            custom_url = ('http://' + custom_url)
+        # if not custom_url.startswith('http://'):
+            # custom_url = ('http://' + custom_url)
         if not custom_url.endswith('/'):
             custom_url += '/'
         return custom_url
